@@ -1,0 +1,9 @@
+[Unit]
+Description=Saludo matutino con síntesis de voz (buenos_dias.zsh)
+After=network-online.target sound.target
+
+[Service]
+Type=oneshot
+# Los servicios de usuario no cargan zshenv: ~/.local/bin (piper, buenos-dias) se agrega a mano
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=%h/.local/bin/buenos-dias

@@ -1,0 +1,9 @@
+# Configuración solo para repos propios.
+# Se carga desde git/gitconfig mediante includeIf (según la URL del remoto).
+# rebase.autoStash y rebase.updateRefs ya están activos en gitconfig para todos los repos.
+
+[pull]
+    # pull.ff = only (global) tiene prioridad sobre pull.rebase; aquí se relaja.
+    ff = true
+    # Rebase de los commits locales, conservando los merges locales.
+    rebase = merges

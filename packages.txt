@@ -1,0 +1,179 @@
+# Paquetes DNF (Fedora + RPM Fusion), uno por línea.
+# Las líneas vacías y las que empiezan con # se ignoran.
+# Lo leen scripts/fedora-install.sh y el bloque DNF del README.
+
+# ── Terminal ──────────────────────────────────────────────────────────────────
+bat
+direnv
+eza
+fastfetch
+fd-find
+fzf
+jq
+mc
+most
+pgcli
+screen
+tmux
+util-linux-script
+vim
+vim-X11
+xclip
+zoxide
+zsh
+
+# ── Monitores ─────────────────────────────────────────────────────────────────
+btop
+cava
+glances
+
+# ── Archivos y compresión ─────────────────────────────────────────────────────
+7zip
+bzip2
+gzip
+ncompress
+rsync
+tar
+unrar
+unzip
+wget
+xz
+zstd
+
+# ── Compilación y desarrollo ──────────────────────────────────────────────────
+autoconf
+automake
+cmake
+gcc
+gcc-c++
+git
+git-lfs
+gtk4-devel
+make
+meson
+ncurses-devel
+ninja-build
+openssl-devel
+perl
+ShellCheck
+shfmt
+vala
+
+# ── Python ────────────────────────────────────────────────────────────────────
+pipx
+python3
+python3-devel
+python3-passlib
+python3-pip
+python3-virtualenv
+
+# ── PHP y Composer ────────────────────────────────────────────────────────────
+composer
+php
+php-bcmath
+php-cli
+php-curl
+php-fpm
+php-gd
+php-imagick
+php-intl
+php-mbstring
+php-memcached
+php-pecl-pcov
+php-pgsql
+php-sodium
+php-sqlite3
+php-xdebug
+php-xml
+php-zip
+
+# ── Bases de datos y cachés ───────────────────────────────────────────────────
+memcached
+pgrouting
+postgis
+postgresql
+postgresql-contrib
+postgresql-plperl
+postgresql-plpython3
+postgresql-server
+sqlite
+valkey
+
+# ── Contenedores, nube y despliegue ───────────────────────────────────────────
+# gh y docker-* vienen de sus repositorios (etc/yum.repos.d; los configura fedora-install.sh)
+ansible-core
+containerd.io
+docker-buildx-plugin
+docker-ce
+docker-ce-cli
+docker-compose-plugin
+doctl
+flatpak
+gh
+podman
+podman-compose
+
+# ── Virtualización ────────────────────────────────────────────────────────────
+# virt-manager en vez de gnome-boxes (fedora-install.sh lo desinstala)
+libvirt-daemon-kvm
+virt-manager
+
+# ── Servicios del sistema ─────────────────────────────────────────────────────
+logrotate
+minidlna
+postfix
+rsyslog
+
+# ── Editores (repositorios en etc/yum.repos.d; los configura fedora-install.sh) ─
+codium
+cursor
+
+# ── Escritorio GNOME ──────────────────────────────────────────────────────────
+chromium
+ptyxis
+gnome-extensions-app
+gnome-shell-extension-appindicator
+gnome-shell-extension-dash-to-dock
+gnome-shell-extension-just-perfection
+gnome-tweaks
+ibm-plex-fonts-all
+libappindicator-gtk3
+libayatana-appindicator-gtk3
+
+# ── Multimedia ────────────────────────────────────────────────────────────────
+picard
+rhythmbox
+rhythmbox-alternative-toolbar
+vlc
+vlc-libs
+vlc-plugins-all
+
+# ── Gráficos ──────────────────────────────────────────────────────────────────
+inkscape
+
+# ── Emulación (NES, SNES, PlayStation y arcade) ──────────────────────────────
+# Los cores que retroarch recomienda (dependencias débiles) no se instalan:
+# fedora-install.sh usa exclude_from_weak='libretro-*'.
+evtest
+libretro-bsnes-mercury
+libretro-nestopia
+libretro-pcsx-rearmed
+mame
+retroarch
+retroarch-assets
+retroarch-database
+retroarch-filters
+
+# ── Diversión en la terminal ──────────────────────────────────────────────────
+asciiquarium
+bastet
+cbonsai
+cmatrix
+cowsay
+espeak-ng
+figlet
+fortune-mod
+lolcat
+sl
+telnet
+toilet

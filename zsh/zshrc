@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+
+# zsh-syntax-highlighting debe ir al final, salvo history-substring-search,
+# que según su documentación se carga después de zsh-syntax-highlighting.
+plugins=( battery colorize command-not-found common-aliases composer dircycle dirhistory dotenv emoji encode64
+git git-extras gh gitignore gpg-agent history jsontools man nmap node npm per-directory-history
+postgres rand-quote redis-cli rsync shrink-path ssh-agent sudo tmux urltools vi-mode vim-interaction web-search zsh-completions
+zsh-syntax-highlighting history-substring-search)
+
+# zsh-completions debe estar en fpath antes de cargar oh-my-zsh (que ejecuta compinit)
+fpath+=${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-completions/src
+source $ZSH/oh-my-zsh.sh
+
+source $HOME/.zshaliases
+source $HOME/.zshfunctions
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+source $HOME/.zshoptions
+
+# Solo fuera de tmux y de la terminal integrada de VSCodium/Cursor (TERM_PROGRAM=vscode)
+if [[ -z $TMUX && $TERM_PROGRAM != vscode ]] && command -v fastfetch >/dev/null 2>&1; then
+  fastfetch
+fi
