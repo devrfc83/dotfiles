@@ -1,0 +1,31 @@
+# Extensiones de VSCodium y Cursor, una por línea (las instala
+# scripts/install-editor-extensions.sh). Una segunda columna limita la extensión
+# a un editor (codium o cursor). Las líneas vacías y las que empiezan con # se ignoran.
+
+anthropic.claude-code codium
+bmewburn.vscode-intelephense-client
+anessaeah.php-intelephense-language-support codium
+bruno-api-client.bruno codium
+charliermarsh.ruff codium
+dart-code.dart-code
+dart-code.flutter
+dbaeumer.vscode-eslint
+dracula-theme.theme-dracula
+detachhead.basedpyright codium
+doonfrs.livewire-support
+dsznajder.es7-react-js-snippets
+eamodio.gitlens codium
+editorconfig.editorconfig
+esbenp.prettier-vscode
+laravel.vscode-laravel
+mikestead.dotenv
+ms-python.debugpy codium
+ms-python.python codium
+mtxr.sqltools
+mtxr.sqltools-driver-pg
+open-southeners.laravel-pint
+porifa.laravel-intelephense
+prince781.vala
+redhat.vscode-xml
+rust-lang.rust-analyzer
+timsexperiments.vscode-tailwindcss

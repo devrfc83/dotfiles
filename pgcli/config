@@ -1,0 +1,26 @@
+# Ajustes propios de pgcli (~/.config/pgcli/config, enlace a pgcli/config). pgcli
+# toma los demás de su configuración por defecto (pgcli/pgclirc del paquete).
+# Colores de la paleta Dracula (scripts/lib/dracula.palette).
+
+[main]
+# Resaltado de SQL: el estilo dracula de Pygments
+syntax_style = dracula
+
+[colors]
+completion-menu.completion.current = 'bg:#bd93f9 #282a36'
+completion-menu.completion = 'bg:#44475a #f8f8f2'
+completion-menu.meta.completion.current = 'bg:#bd93f9 #282a36'
+completion-menu.meta.completion = 'bg:#44475a #f8f8f2'
+completion-menu.multi-column-meta = 'bg:#44475a #f8f8f2'
+scrollbar.arrow = 'bg:#282a36'
+scrollbar = 'bg:#6272a4'
+selected = '#282a36 bg:#bd93f9'
+search = '#282a36 bg:#f1fa8c'
+search.current = '#282a36 bg:#50fa7b'
+bottom-toolbar = 'bg:#44475a #f8f8f2'
+bottom-toolbar.off = 'bg:#44475a #6272a4'
+bottom-toolbar.on = 'bg:#44475a #f8f8f2'
+bottom-toolbar.transaction.valid = 'bg:#44475a #50fa7b bold'
+bottom-toolbar.transaction.failed = 'bg:#44475a #ff5555 bold'
+output.header = "#bd93f9 bold"
+output.null = "#6272a4"

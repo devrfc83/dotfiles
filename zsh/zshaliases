@@ -1,0 +1,115 @@
+#!/usr/bin/env zsh
+
+# Directorio temporal propio (no se exporta como variable: TEMPDIR afectaba a dnf)
+alias cdtemp='mkdir -p "$HOME/.tmpdir" && cd "$HOME/.tmpdir"'
+alias deltemp='cd "$HOME" && command rm -rf -- "$HOME/.tmpdir"'
+alias cl=clear
+alias cls=clear
+alias cp="cp -i"
+# Tamaño de cada directorio (también los enlaces a directorios), con nombres con espacios
+alias dirsize='du -hsL -- */'
+alias fixperms="find . -type d -exec chmod 0750 {} \\; && find . -type f -exec chmod 0644 {} \\;"
+alias fixpermsrestrict="find . -type d -exec chmod 0700 {} \\; && find . -type f -exec chmod 0600 {} \\;"
+alias fuck="sudo \$(fc -ln -1)"
+alias grep="grep --color"
+alias h="history"
+alias hgrep="fc -El 0 | grep"
+alias hist="history"
+alias home="cd $HOME"
+alias l="/bin/ls -lFh $LS_OPTIONS"
+alias la="/bin/ls -lAFh $LS_OPTIONS"
+alias ll="/bin/ls -la $LS_OPTIONS"
+alias ls="/bin/ls $LS_OPTIONS"
+# Variantes de ls (las de common-aliases de oh-my-zsh); con eza se redefinen más abajo
+alias lart="/bin/ls -1Fcart $LS_OPTIONS"
+alias ldot="/bin/ls -ld $LS_OPTIONS .*"
+alias lr="/bin/ls -tRFh $LS_OPTIONS"
+alias lrt="/bin/ls -1Fcrt $LS_OPTIONS"
+alias lS="/bin/ls -1FSsh $LS_OPTIONS"
+alias lsn="/bin/ls -1 $LS_OPTIONS"
+alias lsr="/bin/ls -lARFh $LS_OPTIONS"
+alias lt="/bin/ls -ltFh $LS_OPTIONS"
+alias mapa="telnet mapscii.me"
+alias mate="$EDITOR"
+alias mv="mv -i"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+alias p="ps -f"
+alias please='sudo $(fc -ln -1)'
+alias rm="rm -i"
+alias rmemptydirs="find . -type d -empty -delete"
+alias rmemptyfiles="find . -type f -empty -delete"
+alias root="sudo su -"
+alias shit="sudo \$(fc -ln -1)"
+alias sortnr="sort -n -r"
+alias starwars="curl -s telnet://towel.blinkenlights.nl"
+alias t="tail -f"
+alias www="python -m http.server 8000"
+alias zshconfig="$EDITOR $HOME/.zshrc"
+alias zshreload="source $HOME/.zshrc"
+
+if (( $+commands[pgcli] )); then
+  alias pg="pgcli"
+fi
+
+if (( $+commands[pg_format] )); then
+  alias pgfmt="pg_format"
+fi
+
+if (( $+commands[eza] )); then
+    alias ls="eza --no-quotes --group-directories-first --icons=auto"
+    alias l="eza --no-quotes -lF --group-directories-first --icons=auto"
+    alias la="eza --no-quotes -laF --group-directories-first --icons=auto"
+    alias ll="eza --no-quotes -la --group-directories-first --icons=auto"
+    # Variantes de ls. eza ordena por fecha y tamaño de menor a mayor, al revés que
+    # ls -t y ls -S: --reverse las iguala. En eza, -h es --header (los tamaños ya son
+    # legibles), y las ordenadas por fecha o tamaño no agrupan los directorios.
+    alias lart="eza --no-quotes -1aF --icons=auto --sort=changed"
+    alias ldot="eza --no-quotes -ld --icons=auto .*"
+    alias lr="eza --no-quotes -RF --icons=auto --sort=modified --reverse"
+    alias lrt="eza --no-quotes -1F --icons=auto --sort=changed"
+    alias lS="eza --no-quotes -l --no-permissions --no-user --no-time -F --icons=auto --sort=size --reverse"
+    alias lsn="eza --no-quotes -1 --group-directories-first --icons=auto"
+    alias lsr="eza --no-quotes -laRF --group-directories-first --icons=auto"
+    alias lt="eza --no-quotes -lF --icons=auto --sort=modified --reverse"
+fi
+
+if (( $+commands[fzf] )); then
+  if (( $+commands[bat] )); then
+    alias fzfp="fzf --preview 'bat --style=numbers --color=always {}'"
+  elif (( $+commands[batcat] )); then
+    alias fzfp="fzf --preview 'batcat --style=numbers --color=always {}'"
+  else
+    alias fzfp="fzf --preview 'cat {}'"
+  fi
+fi
+
+if (( $+commands[fd] )); then
+  alias fdh="fd --hidden --follow --exclude .git"
+fi
+
+if (( $+commands[bat] )); then
+  alias bcat="bat --style=plain --paging=never"
+elif (( $+commands[batcat] )); then
+  alias bcat="batcat --style=plain --paging=never"
+fi
+
+if (( $+commands[direnv] )); then
+  alias denv="direnv allow"
+fi
+
+# Alias de sufijo: escribir el nombre de un archivo de vídeo o de audio (por
+# ejemplo, ./clip.mkv) lo abre en el reproductor de Fedora: Showtime o Decibels.
+# gtk4-launch los abre aparte, sin ocupar la terminal.
+if (( $+commands[gtk4-launch] )); then
+  if [[ -f /usr/share/applications/org.gnome.Showtime.desktop ]]; then
+    for ext in avi flv m4v mkv mov mp4 mpeg mpg ogm ogv webm wmv; do
+      alias -s $ext="gtk4-launch org.gnome.Showtime"
+    done
+  fi
+  if [[ -f /usr/share/applications/org.gnome.Decibels.desktop ]]; then
+    for ext in aac ape flac m4a mp3 oga ogg opus wav wma; do
+      alias -s $ext="gtk4-launch org.gnome.Decibels"
+    done
+  fi
+  unset ext
+fi

@@ -1,0 +1,72 @@
+#!/usr/bin/env zsh
+
+zmodload zsh/terminfo
+
+# -------------------------------------------------
+# Edición de línea en modo vi
+# -------------------------------------------------
+# El modo vi lo activa el plugin vi-mode (zshrc), que también define Ctrl-A y
+# Ctrl-E (inicio y final de línea), vv (editar la línea en Vim) y un Retroceso
+# que borra antes del punto de inserción.
+# Esc cambia de modo al instante (10 ms en vez de 400 ms), como escape-time en
+# tmux y ttimeoutlen en Vim
+KEYTIMEOUT=1
+# Cursor según el modo, como en Vim: barra al insertar y bloque en modo comando
+VI_MODE_SET_CURSOR=true
+
+# -------------------------------------------------
+# history-substring-search (como ↑/↓ en Vim)
+# -------------------------------------------------
+# El plugin se carga en zshrc; estos atajos buscan en el historial
+# lo ya escrito con las flechas y, en modo comando, con j/k.
+bindkey "$terminfo[kcuu1]" history-substring-search-up   # Flecha arriba
+bindkey "$terminfo[kcud1]" history-substring-search-down # Flecha abajo
+
+# En modo comando de vi (tras pulsar Esc)
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# h/l, b/w, 0/$, x, d{movimiento}, yy y p usan los widgets vi nativos de zsh
+
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+setopt ALWAYS_TO_END
+setopt AUTO_CD
+setopt AUTO_MENU
+setopt AUTO_PARAM_SLASH
+setopt AUTO_PUSHD
+setopt CDABLE_VARS
+setopt CLOBBER_EMPTY
+setopt COMPLETE_ALIASES
+setopt COMPLETE_IN_WORD
+setopt CORRECT
+setopt EXTENDED_GLOB
+setopt EXTENDED_HISTORY
+setopt GLOB_COMPLETE
+setopt HIST_ALLOW_CLOBBER
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FCNTL_LOCK
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_LEX_WORDS
+setopt HIST_NO_FUNCTIONS
+setopt HIST_NO_STORE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_BY_COPY
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
+setopt IGNORE_EOF
+setopt NO_BEEP
+setopt NO_BG_NICE
+setopt NO_HIST_BEEP
+setopt NO_HUP
+setopt NO_LIST_BEEP
+setopt NO_MATCH
+setopt NOTIFY
+setopt PROMPT_SUBST
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_TO_HOME
+# Un solo historial (~/.zsh_history), compartido al instante entre terminales:
+# cada comando se escribe al ejecutarse y las demás lo leen. Ya lo activa
+# oh-my-zsh; se deja explícito porque excluye INC_APPEND_HISTORY(_TIME).
+setopt SHARE_HISTORY

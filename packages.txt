@@ -1,0 +1,212 @@
+# Paquetes DNF (Fedora + RPM Fusion), uno por línea.
+# Las líneas vacías y las que empiezan con # se ignoran.
+# Lo leen scripts/fedora-install.sh y scripts/check-packages.sh.
+
+# ── Terminal ──────────────────────────────────────────────────────────────────
+bat
+direnv
+eza
+fastfetch
+fd-find
+fzf
+# Secretos en los repositorios: el hook global de git (git/hooks) y scripts/lint.sh
+gitleaks
+jq
+mc
+most
+pgcli
+pspg
+ripgrep
+screen
+tmux
+util-linux-script
+vim-enhanced
+vim-X11
+wl-clipboard
+xclip
+zoxide
+zsh
+
+# ── Monitores ─────────────────────────────────────────────────────────────────
+btop
+cava
+glances
+
+# ── Archivos y compresión ─────────────────────────────────────────────────────
+7zip
+bzip2
+gzip
+ncompress
+rsync
+tar
+unrar
+unzip
+wget2-wget
+xz
+zstd
+
+# ── Compilación y desarrollo ──────────────────────────────────────────────────
+autoconf
+automake
+blueprint-compiler
+cmake
+gcc
+gcc-c++
+git
+git-lfs
+glib2-devel
+gtk4-devel
+libadwaita-devel
+make
+meson
+ncurses-devel
+ninja-build
+openssl-devel
+perl
+ShellCheck
+shfmt
+vala
+vala-language-server
+
+# ── Python ────────────────────────────────────────────────────────────────────
+pipx
+python3
+python3-devel
+python3-passlib
+python3-pip
+python3-virtualenv
+ruff
+
+# ── PHP y Composer ────────────────────────────────────────────────────────────
+# Nombres reales de los paquetes. Extensiones sin paquete propio: curl viene en
+# php-common; sqlite3 y pdo_sqlite, en php-pdo.
+composer
+php
+php-bcmath
+php-cli
+php-common
+php-fpm
+php-gd
+php-intl
+php-mbstring
+php-pdo
+php-pecl-imagick
+php-pecl-memcached
+php-pecl-pcov
+php-pecl-xdebug3
+php-pecl-zip
+php-pgsql
+php-sodium
+php-xml
+
+# ── Bases de datos y cachés ───────────────────────────────────────────────────
+memcached
+pgrouting
+postgis
+postgresql
+postgresql-contrib
+postgresql-plperl
+postgresql-plpython3
+postgresql-server
+sqlite
+valkey
+valkey-compat-redis
+
+# ── Contenedores, nube y despliegue ───────────────────────────────────────────
+# gh y docker-* vienen de sus repositorios (etc/yum.repos.d; los configura fedora-install.sh)
+ansible-core
+containerd.io
+docker-buildx-plugin
+docker-ce
+docker-ce-cli
+docker-compose-plugin
+doctl
+flatpak
+gh
+podman
+podman-compose
+
+# ── Virtualización ────────────────────────────────────────────────────────────
+# virt-manager en vez de gnome-boxes (fedora-install.sh lo desinstala)
+libvirt-daemon-kvm
+virt-manager
+
+# ── Servicios del sistema ─────────────────────────────────────────────────────
+logrotate
+minidlna
+postfix
+rsyslog
+
+# ── Seguridad (revisar equipos propios) ───────────────────────────────────────
+# sqlmap (pipx) y nikto (upstream) no están en Fedora: los instala extras-install.sh.
+# Los módulos de Perl son los que necesita nikto. Con wireshark, fedora-install.sh
+# agrega el usuario al grupo wireshark (capturar sin root).
+lynis
+nmap
+perl-IO-Socket-SSL
+perl-JSON
+perl-Net-SSLeay
+perl-XML-LibXML
+perl-XML-Writer
+rkhunter
+wireshark
+
+# ── Editores (repositorios en etc/yum.repos.d; los configura fedora-install.sh) ─
+codium
+cursor
+
+# ── Escritorio GNOME ──────────────────────────────────────────────────────────
+chromium
+nextcloud-client
+nextcloud-client-nautilus
+ptyxis
+gnome-extensions-app
+gnome-shell-extension-appindicator
+gnome-shell-extension-dash-to-dock
+gnome-shell-extension-just-perfection
+gnome-tweaks
+ibm-plex-fonts-all
+libappindicator-gtk3
+libayatana-appindicator-gtk3
+
+# ── Multimedia ────────────────────────────────────────────────────────────────
+# decibels y showtime: los reproductores de Fedora, que abren los alias de sufijo
+# de zsh/zshaliases (escribir el nombre de un audio o un vídeo)
+decibels
+picard
+rhythmbox
+rhythmbox-alternative-toolbar
+showtime
+vlc
+vlc-libs
+vlc-plugins-all
+
+# ── Gráficos ──────────────────────────────────────────────────────────────────
+inkscape
+
+# ── Emulación (NES, SNES, PlayStation y arcade) ──────────────────────────────
+# Los cores que retroarch recomienda (dependencias débiles) no se instalan:
+# fedora-install.sh usa exclude_from_weak='libretro-*'.
+evtest
+libretro-bsnes-mercury
+libretro-nestopia
+libretro-pcsx-rearmed
+mame
+retroarch
+retroarch-assets
+retroarch-database
+retroarch-filters
+
+# ── Diversión en la terminal ──────────────────────────────────────────────────
+asciiquarium
+bastet
+cbonsai
+cmatrix
+cowsay
+espeak-ng
+figlet
+fortune-mod
+lolcat
+sl
+telnet
+toilet

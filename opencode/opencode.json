@@ -1,0 +1,12 @@
+// Configuración global de opencode (~/.config/opencode/opencode.json, enlace a
+// este archivo). El opencode.json de cada proyecto se combina con este.
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Pregunta antes de editar archivos o ejecutar órdenes. Reglas en orden; el
+  // formato anterior ("permission": {"edit": "ask", ...}) quedó obsoleto en
+  // opencode 2.
+  "permissions": [
+    { "action": "edit", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "*", "effect": "ask" },
+  ],
+}

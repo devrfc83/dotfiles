@@ -1,0 +1,121 @@
+# ~/.inputrc — configuración de readline
+# Se aplica a bash, al REPL de Python, psql y otros programas que usan readline.
+# zsh no usa readline (tiene su propio editor de línea, ZLE; ver zsh/zshoptions).
+
+# Modo vi. Debe ir antes de los atajos: cada atajo se asigna al modo de edición
+# activo en ese punto del archivo; definidos antes, quedarían solo en el modo emacs.
+set editing-mode vi
+
+# ── Completado ────────────────────────────────────────────────────────────────
+
+# Completado sin distinguir mayúsculas (foo coincide con Foo, FOO, etc.)
+set completion-ignore-case on
+
+# Guiones y guiones bajos son equivalentes al completar
+set completion-map-case on
+
+# Mostrar las opciones al primer Tab (en vez de requerir dos)
+set show-all-if-ambiguous on
+
+# Sin campana cuando el completado es ambiguo
+set bell-style none
+
+# Agregar una barra a los directorios completados
+set mark-directories on
+set mark-symlinked-directories on
+
+# Indicadores de tipo de archivo en las listas de completado (como `ls -F`)
+set visible-stats on
+
+# Colorear las opciones según el tipo de archivo (usa $LS_COLORS)
+set colored-stats on
+
+# Resaltar el prefijo común en las listas de completado
+set colored-completion-prefix on
+
+# No completar archivos ocultos salvo que el patrón empiece con un punto
+set match-hidden-files off
+
+# Con más de N opciones, preguntar antes de listarlas todas
+set completion-query-items 200
+
+
+# ── Historial ─────────────────────────────────────────────────────────────────
+
+# Al recorrer el historial, dejar el cursor en la misma posición de cada línea
+set history-preserve-point on
+
+
+# ── Edición ───────────────────────────────────────────────────────────────────
+
+# No mostrar el indicador del modo vi (inserción/comando) en el prompt
+set show-mode-in-prompt off
+
+# Entrada y salida UTF-8
+set input-meta on
+set output-meta on
+set convert-meta off
+
+$if mode=vi
+  # ── Modo inserción ──
+  set keymap vi-insert
+
+  # ↑/↓ y Ctrl-p/Ctrl-n: buscar en el historial por lo ya escrito (prefijo)
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  "\C-p": history-search-backward
+  "\C-n": history-search-forward
+
+  # Atajos de Emacs útiles en modo inserción
+  "\C-a": beginning-of-line
+  "\C-e": end-of-line
+
+  # Ctrl+Izquierda / Ctrl+Derecha: saltar palabras
+  "\e[1;5C": forward-word
+  "\e[1;5D": backward-word
+
+  # Alt+Retroceso: borrar la palabra anterior
+  "\e\177": backward-kill-word
+
+  # Alt+d: borrar la palabra siguiente
+  "\ed": kill-word
+
+  # Ctrl+Retroceso (Ptyxis y otras terminales VTE envían ^H): borrar la palabra anterior
+  "\C-h": backward-kill-word
+
+  # Ctrl+Supr: borrar hasta el final de la línea
+  "\e[3;5~": kill-line
+
+  # Inicio / Fin (secuencias de distintos terminales)
+  "\e[H": beginning-of-line
+  "\e[F": end-of-line
+  "\eOH": beginning-of-line
+  "\eOF": end-of-line
+
+  # RePág / AvPág: buscar en el historial por prefijo
+  "\e[5~": history-search-backward
+  "\e[6~": history-search-forward
+
+  # ── Modo comando (tras Esc) ──
+  set keymap vi-command
+
+  # ↑/↓ y Ctrl-p/Ctrl-n: igual que en modo inserción
+  "\e[A": history-search-backward
+  "\e[B": history-search-forward
+  "\C-p": history-search-backward
+  "\C-n": history-search-forward
+
+  set keymap vi-insert
+$endif
+
+
+# ── Presentación ──────────────────────────────────────────────────────────────
+
+# Expandir ~ a la ruta completa al completar (~/doc → /home/usuario/doc)
+set expand-tilde on
+
+# Listar las opciones de completado en columnas, ordenadas hacia abajo
+set print-completions-horizontally off
+
+# No mostrar ^C, ^Z, etc. al pulsar esas teclas
+set echo-control-characters off

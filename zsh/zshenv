@@ -1,0 +1,79 @@
+#!/usr/bin/env zsh
+
+# PATH
+# typeset -U: sin entradas duplicadas aunque se aniden shells (tmux, subshells)
+# Sin /bin ni /sbin: en Fedora son enlaces a /usr/bin y /usr/sbin
+typeset -U path PATH
+PATH="/usr/sbin:$PATH"
+PATH="/usr/local/sbin:$PATH"
+PATH="/usr/bin:$PATH"
+PATH="/usr/local/bin:$PATH"
+# Solo en algunos equipos (llama.cpp compilado a mano)
+if [[ -d /opt/llama.cpp/bin ]]; then
+  PATH="/opt/llama.cpp/bin:$PATH"
+fi
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+  . "$HOME/.cargo/env"
+elif [[ -d "$HOME/.cargo/bin" ]]; then
+  PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# opencode (scripts/install-opencode.sh)
+if [[ -d "$HOME/.opencode/bin" ]]; then
+  PATH="$HOME/.opencode/bin:$PATH"
+fi
+
+# Al final: un paquete global de Composer no debe tapar comandos del sistema
+PATH="$PATH:$HOME/.composer/vendor/bin"
+
+export PATH
+
+export EDITOR="/usr/bin/vimx"
+
+# Variables de PostgreSQL (las usan psql, pgcli y psqlx). La contraseña no va en
+# el entorno, que hereda cada proceso: está en ~/.pgpass (lo genera install-postgresql.sh).
+: "${PGHOST:=localhost}"
+: "${PGPORT:=5432}"
+: "${PGUSER:=developer}"
+: "${PGDATABASE:=development}"
+export PGHOST PGPORT PGUSER PGDATABASE
+
+# Ubicación para el clima (wttr.in): barra de tmux y screen, clima, clima-hoy y el
+# saludo matutino. Puede sobrescribirse antes (por ejemplo, en ~/.config/environment.d/).
+# Vacía, wttr.in la deduce de la IP.
+: "${CURRENT_LOCATION=Talca}"
+export CURRENT_LOCATION
+
+# Colores, paginador y fzf: se exportan porque los leen otros programas. Las
+# variables de oh-my-zsh y del historial están en zshrc, sin exportar: si no, las
+# heredaría todo proceso (un bash abierto desde zsh escribiría en ~/.zsh_history).
+export CLICOLOR=1
+export COLORTERM="truecolor"
+# Paleta Dracula (scripts/lib/dracula.palette): fzf con sus colores oficiales, el
+# tema Dracula de bat (también en fzfp y bcat) y el skin de mc (mc/skins/dracula.ini)
+export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+export BAT_THEME="Dracula"
+export MC_SKIN="dracula"
+export LS_OPTIONS='--color=auto'
+export MANPAGER="/usr/bin/most"
+export MANPATH="/usr/local/man:/usr/share/man:$MANPATH"
+export QUOTING_STYLE="literal"
+export PAGER="/usr/bin/most"
+export VISUAL="/usr/bin/vimx"
+
+# npm: configuración pública en el repo + credenciales fuera del repo. npm no
+# admite "include" en npmrc: dotfiles-install.sh combina ~/.npmrc y el archivo
+# privado (token) en npmrc-effective, y aquí solo se exporta. Sin archivo
+# privado, npm usa ~/.npmrc, su valor por defecto.
+if [[ -f "$HOME/.config/npm/npmrc-effective" ]]; then
+    export NPM_CONFIG_USERCONFIG="$HOME/.config/npm/npmrc-effective"
+fi
+
+# Desactiva las secuencias OSC de contexto de systemd (incompatibles con tmux/screen)
+__systemd_osc_context_precmdline() { :; }
+__systemd_osc_context_common() { :; }
+__systemd_osc_context_escape() { :; }
+PS0=""

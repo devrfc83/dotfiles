@@ -1,0 +1,246 @@
+[user]
+    name = "Rodrigo Fuentealba Cartes"
+    email = "121529607+devrfc83@users.noreply.github.com"
+    signingkey = ~/.ssh/id_ed25519
+
+[gpg]
+    format = "ssh"
+
+[gpg "ssh"]
+    key = ~/.ssh/id_ed25519
+    # Lo genera scripts/dotfiles-install.sh; permite verificar firmas (git log --show-signature)
+    allowedSignersFile = ~/.config/git/allowed_signers
+
+[github]
+    user = "devrfc83"
+    email = "121529607+devrfc83@users.noreply.github.com"
+
+[gist]
+    private = "no"
+
+[core]
+    attributesfile = "~/.gitattributes"
+    autocrlf = input
+    editor = "/usr/bin/vimx"
+    excludesfile = "~/.gitignore"
+    # Hooks globales (git/hooks): gitleaks antes de cada commit y luego el hook
+    # propio de cada repositorio
+    hooksPath = "~/.config/git/hooks"
+    ignorecase = false
+    pager = "most"
+    symlinks = true
+    trustctime = false
+    untrackedCache = true
+    whitespace = "space-before-tab,-indent-with-non-tab,trailing-space"
+
+[init]
+    defaultBranch = "main"
+
+[apply]
+    ignorewhitespace = "change"
+    whitespace = "fix"
+
+[commit]
+    gpgsign = true
+    verbose = true
+
+[column]
+    ui = auto
+
+[push]
+    default = "upstream"
+    followTags = true
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+# Por defecto, pull solo avanza en fast-forward; si las ramas divergieron, falla y
+# se decide a mano (git pr / git m). En repos propios lo cambia gitconfig-personal.
+[pull]
+    ff = only
+
+[rebase]
+    autosquash = true
+    autoStash = true
+    updateRefs = true
+
+[rerere]
+    enabled = true
+
+# Colores de la paleta Dracula (scripts/lib/dracula.palette)
+[color]
+    ui = auto
+
+[color "branch"]
+    current = "bold reverse #bd93f9"
+    local = "#f8f8f2"
+    plain =
+    remote = "#8be9fd"
+
+[color "diff"]
+    commit =
+    context = "#f8f8f2"
+    func = "#8be9fd"
+    plain =
+    whitespace = "reverse #ff79c6"
+    meta = "bold #f8f8f2"
+    frag = "bold reverse #bd93f9"
+    old = "bold #ff5555"
+    new = "bold #50fa7b"
+
+[color "grep"]
+    context =
+    filename = "#f1fa8c"
+    function = "bold #f1fa8c"
+    linenumber = "#6272a4"
+    match = "bold #ff5555"
+    selected =
+    separator =
+
+[color "interactive"]
+    error = "bold #ff5555"
+    header = "bold #f8f8f2"
+    help = "#f1fa8c"
+    prompt = "bold #bd93f9"
+
+[color "status"]
+    added = "bold #50fa7b"
+    changed = "#f1fa8c"
+    header = "bold #f8f8f2"
+    localBranch = "bold #bd93f9"
+    nobranch = "bold reverse #ff5555"
+    remoteBranch = "bold #8be9fd"
+    unmerged = "bold reverse #ff79c6"
+    untracked = "bold #50fa7b"
+    updated = "bold #ffb86c"
+
+[help]
+    format = "html"
+    autocorrect = prompt
+
+[diff]
+    algorithm = histogram
+    renames = "copies"
+    tool = "vscodium"
+
+[difftool]
+    prompt = false
+    trustExitCode = false
+    keepBackup = false
+
+[difftool "vscodium"]
+    cmd = "/usr/bin/codium --wait --diff $LOCAL $REMOTE"
+
+[difftool "cursor"]
+    cmd = "cursor --wait --diff $LOCAL $REMOTE"
+
+[merge]
+    tool = "vscodium"
+    conflictStyle = zdiff3
+    log = true
+    branchdesc = true
+
+[mergetool]
+    prompt = false
+    trustExitCode = false
+    keepBackup = false
+
+[mergetool "vscodium"]
+    cmd = "/usr/bin/codium --wait $MERGED"
+
+[pack]
+    packSizeLimit = 2g
+
+[filter "lfs"]
+    clean = "git-lfs clean -- %f"
+    smudge = "git-lfs smudge -- %f"
+    process = "git-lfs filter-process"
+    required = true
+
+[web]
+    browser = "chromium"
+
+[url "git@github.com:devrfc83/"]
+    insteadOf = github://
+
+[url "ssh://git@git.seadragon.cl:2222/seadragon/"]
+    insteadOf = seadragon://
+
+# Repos propios (según la URL del remoto): rebase automático en pull.
+# Se comparan las URLs tal como quedan en .git/config, por eso se listan
+# tanto los atajos insteadOf como las URLs completas.
+[includeIf "hasconfig:remote.*.url:github://**"]
+    path = ~/.gitconfig-personal
+
+[includeIf "hasconfig:remote.*.url:git@github.com:devrfc83/**"]
+    path = ~/.gitconfig-personal
+
+# Repos de Sea Dragon (según la URL del remoto): correo de trabajo.
+[includeIf "hasconfig:remote.*.url:seadragon://**"]
+    path = ~/.gitconfig-seadragon
+
+[includeIf "hasconfig:remote.*.url:ssh://git@git.seadragon.cl:2222/seadragon/**"]
+    path = ~/.gitconfig-seadragon
+
+[alias]
+    new = init
+    a = add
+    all = add --all
+    b = branch
+    bd = branch -d
+    bl = blame
+    root = rev-parse --show-toplevel
+    ci = commit -S -s
+    cia = commit -S -s --amend
+    cie = commit -S -s --allow-empty
+    cian = commit -S -s --amend --no-edit
+    cl = clean -df
+    co = checkout
+    coo = checkout --ours
+    cot = checkout --theirs
+    d = rm
+    df = diff
+    dt = difftool
+    f = fetch
+    fa = fetch --all
+    fi = fetch origin
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    ignored = ls-files --ignored --exclude-standard --others
+    l = log --pretty --oneline
+    lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --color --graph --abbrev-commit --
+    logp = log --pretty
+    m = merge --no-edit
+    mt = mergetool
+    pl = pull
+    plo = pull origin
+    plom = pull origin main
+    plt = pull --dry-run
+    pr = pull --rebase
+    ps = push
+    psf = push --force-with-lease --force-if-includes
+    psu = push --set-upstream
+    rb = rebase
+    rba = rebase --abort
+    rbad = rebase --committer-date-is-author-date
+    rbc = rebase --continue
+    rbi = rebase -i
+    rbs = rebase --skip
+    rem = remote
+    rema = remote add
+    remr = remote remove
+    remotes = remote -v
+    rfc = "!TZ=UTC GIT_AUTHOR_DATE='1983-02-22 00:00:00 +0000' GIT_COMMITTER_DATE='1983-02-22 00:00:00 +0000' git cian --date='1983-02-22 00:00:00 +0000'"
+    s = status
+    st = stash
+    sta = stash apply
+    stc = stash clear
+    std = stash drop
+    stl = stash list
+    stp = stash pop
+    standup = shortlog --since=yesterday
+    sw = switch
+    uca = reset --soft HEAD@{1}
+    uc = reset HEAD^
+    unstage = reset HEAD --
+    who = shortlog -s -n --no-merges --

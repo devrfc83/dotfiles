@@ -1,0 +1,15 @@
+[Unit]
+Description=Saludo matutino con síntesis de voz (buenos_dias.zsh)
+# network-online.target es del sistema y el gestor de usuario no lo ve: la red
+# se espera con nm-online (ExecStartPre). El audio sale por PipeWire, y
+# WirePlumber conecta pw-play y espeak-ng con la salida.
+Wants=pipewire.service pipewire-pulse.service wireplumber.service
+After=pipewire.service pipewire-pulse.service wireplumber.service
+
+[Service]
+Type=oneshot
+# Hasta 30 s a que NetworkManager tenga conexión; si no, saluda igual (sin temperatura)
+ExecStartPre=-/usr/bin/nm-online -q -t 30
+# PATH mínimo para encontrar zsh; luego el script carga ~/.zshenv (PATH completo y CURRENT_LOCATION)
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=%h/.local/bin/buenos-dias

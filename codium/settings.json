@@ -1,0 +1,103 @@
+// Configuración de VSCodium (~/.config/VSCodium/User/settings.json, enlace a
+// este archivo). Los cambios hechos desde la interfaz se escriben aquí.
+{
+  "claudeCode.preferredLocation": "panel",
+  "workbench.startupEditor": "none",
+
+  // Tema Dracula (extensión dracula-theme.theme-dracula), como la terminal
+  "workbench.colorTheme": "Dracula Theme",
+
+  // ── Fuentes ──────────────────────────────────────────────────────────────────
+  // Editor: FiraCode con ligaduras (=> != >= ->). Terminal integrada: variante
+  // Mono, porque trabaja en una cuadrícula de celdas, como Ptyxis.
+  "editor.fontFamily": "'FiraCode Nerd Font', monospace",
+  "editor.fontLigatures": true,
+  "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono'",
+
+  // ── Longitud de línea (la de editorconfig: 132; Markdown: 80) ────────────────
+  // Ajuste de línea visual en la misma columna que la regla.
+  "editor.rulers": [132],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 132,
+  "[markdown]": {
+    "editor.rulers": [80],
+    "editor.wordWrapColumn": 80,
+  },
+
+  // ── Formato al guardar ───────────────────────────────────────────────────────
+  // PHP con Pint: usa el pint.json del proyecto (sin él, el preset de Laravel).
+  "editor.formatOnSave": true,
+  "intelephense.format.enable": false,
+  "[php]": {
+    "editor.defaultFormatter": "open-southeners.laravel-pint",
+  },
+  // Rust con rust-analyzer (usa rustfmt)
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+
+  // ── PHP: solo Intelephense (sin el soporte integrado de VSCodium) ────────────
+  "php.suggest.basic": false,
+  "php.validate.enable": false,
+
+  // ── Python: basedpyright y Ruff (solo VSCodium) ──────────────────────────────
+  // Sin Pylance, ms-python levantaría Jedi, que choca con basedpyright (completado
+  // duplicado y un aviso al iniciar): basedpyright queda como único servidor.
+  "python.languageServer": "None",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+  },
+
+  // ── Telemetría ───────────────────────────────────────────────────────────────
+  "redhat.telemetry.enabled": false,
+
+  // ── Exclusiones (como wildignore del vimrc) ──────────────────────────────────
+  // Fuera de las búsquedas y de Ctrl+P; Intelephense sigue indexando vendor/.
+  "search.exclude": {
+    "**/cache": true,
+    "**/vendor": true,
+    "**/versions": true,
+  },
+  "files.watcherExclude": {
+    "**/cache/**": true,
+    "**/vendor/**": true,
+    "**/versions/**": true,
+  },
+  "claudeCode.hideOnboarding": true,
+}
