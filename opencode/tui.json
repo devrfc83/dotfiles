@@ -1,0 +1,7 @@
+// Interfaz de opencode (~/.config/opencode/tui.json, enlace a este archivo). En
+// opencode 2 el tema va aquí, no en opencode.json.
+{
+  "$schema": "https://opencode.ai/tui.json",
+  // Tema Dracula (incluido en opencode), como la terminal
+  "theme": "dracula",
+}

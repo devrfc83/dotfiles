@@ -1,0 +1,6 @@
+[codium]
+name=Download VSCodium - RPM
+baseurl=https://download.vscodium.com/rpms/
+enabled=1
+gpgcheck=1
+gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg

@@ -1,0 +1,62 @@
+#!/usr/bin/env zsh
+
+# Variables de oh-my-zsh y de zsh: solo las lee esta shell, así que no se
+# exportan. Deben definirse antes de cargar oh-my-zsh.
+ZSH="$HOME/.oh-my-zsh"
+ZSH_COMPDUMP="$ZSH/cache/.zcompdump-$HOST"
+ZSH_THEME="pygmalion"
+CASE_SENSITIVE="false"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_AUTO_TITLE="true"
+DISABLE_LS_COLORS="false"
+DISABLE_MAGIC_FUNCTIONS="false"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+ENABLE_CORRECTION="true"
+HIST_STAMPS="yyyy-mm-dd"
+HYPHEN_INSENSITIVE="false"
+# Historial y pila de directorios (oh-my-zsh solo fija los suyos si faltan o son menores)
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=99999
+SAVEHIST=99999
+DIRSTACKSIZE=64
+MAILCHECK=60
+
+# Sin actualizaciones automáticas: oh-my-zsh lo actualiza dotfiles-update.sh (con
+# install-shell-plugins.sh); a mano, con omz update
+zstyle ':omz:update' mode disabled
+
+# Sin el plugin ssh-agent: el agente es el de GNOME (gcr-ssh-agent), que la sesión
+# exporta en SSH_AUTH_SOCK y comparten las terminales y los editores.
+# zsh-syntax-highlighting debe ir al final, salvo history-substring-search,
+# que según su documentación se carga después de zsh-syntax-highlighting.
+plugins=( colorize command-not-found composer dircycle dirhistory dotenv encode64 fnm
+git git-extras gh gitignore gpg-agent history jsontools man nmap node npm postgres
+redis-cli rsync shrink-path sudo tmux urltools vi-mode vim-interaction zsh-completions
+zsh-syntax-highlighting history-substring-search)
+
+# fnm (versiones de Node): lo activa el plugin fnm, que también genera su completado.
+# Con use-on-cd cambia de versión al entrar en un directorio con .nvmrc o .node-version.
+zstyle ':omz:plugins:fnm' autostart yes
+zstyle ':omz:plugins:fnm' use-on-cd yes
+
+# zsh-completions debe estar en fpath antes de cargar oh-my-zsh (que ejecuta compinit)
+fpath+=${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-completions/src
+source $ZSH/oh-my-zsh.sh
+
+source $HOME/.zshaliases
+source $HOME/.zshfunctions
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+source $HOME/.zshoptions
+
+# Solo fuera de tmux y de la terminal integrada de VSCodium/Cursor (TERM_PROGRAM=vscode)
+if [[ -z $TMUX && $TERM_PROGRAM != vscode ]] && command -v fastfetch >/dev/null 2>&1; then
+  fastfetch
+fi

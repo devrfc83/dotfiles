@@ -1,0 +1,73 @@
+-- Configuración de psql (~/.psqlrc, enlace a postgresql/psqlrc).
+-- Para abrir psql sin ella: psql -X. Los atajos de abajo se escriben solos en
+-- una línea, con dos puntos (por ejemplo, :actividad); :ayuda los lista.
+
+-- Sin mensajes mientras se carga este archivo
+\set QUIET 1
+
+-- ── Resultados ────────────────────────────────────────────────────────────────
+-- NULL visible (distinto de una cadena vacía)
+\pset null '∅'
+-- Tablas con bordes Unicode
+\pset linestyle unicode
+\pset border 2
+-- Formato expandido (un campo por línea) cuando la tabla no cabe a lo ancho
+\x auto
+-- Duración de cada consulta
+\timing on
+
+-- pspg (paginador para tablas: columnas fijas, búsqueda, ratón) si está
+-- instalado; si no, el de PAGER. -X deja el resultado en pantalla al salir y
+-- --quit-if-one-screen no pagina lo que cabe en una pantalla; -s 24 es su estilo
+-- Dracula.
+\set tiene_pspg `command -v pspg >/dev/null 2>&1 && echo true || echo false`
+\if :tiene_pspg
+  \setenv PSQL_PAGER 'pspg -s 24 -X --quit-if-one-screen --ignore-case'
+\endif
+\unset tiene_pspg
+
+-- ── Edición e historial ───────────────────────────────────────────────────────
+-- Palabras clave en mayúsculas al completar con Tab
+\set COMP_KEYWORD_CASE upper
+-- Un historial por base de datos, en ~/.local/state/psql (lo crea dotfiles-install.sh)
+\set HISTFILE ~/.local/state/psql/history- :DBNAME
+\set HISTSIZE 10000
+\set HISTCONTROL ignoredups
+
+-- ── Errores y transacciones ───────────────────────────────────────────────────
+-- En una transacción abierta, un error interactivo no la aborta entera: deshace
+-- solo esa orden (con un SAVEPOINT implícito)
+\set ON_ERROR_ROLLBACK interactive
+-- Contexto (CONTEXT) solo en los errores, no en avisos ni NOTICE
+\set SHOW_CONTEXT errors
+
+-- ── Prompt ────────────────────────────────────────────────────────────────────
+-- usuario@servidor:base, y el estado de la transacción: * abierta, ! con error.
+-- Colores ANSI básicos (los toma de la paleta de la terminal).
+\set PROMPT1 '%[%033[1m%]%n@%m%[%033[0m%]:%[%033[1;34m%]%/%[%033[0m%]%[%033[1;33m%]%x%[%033[0m%]%R%# '
+\set PROMPT2 '%[%033[2m%]%/%R%x%#%[%033[0m%] '
+
+-- ── Atajos ────────────────────────────────────────────────────────────────────
+-- Conexiones activas (sin las inactivas ni esta), con su duración y su consulta
+\set actividad 'SELECT pid, usename, datname, state, wait_event_type, wait_event, now() - query_start AS duracion, left(query, 80) AS consulta FROM pg_stat_activity WHERE state <> ''idle'' AND pid <> pg_backend_pid() ORDER BY query_start;'
+-- Procesos bloqueados y quién los bloquea
+\set bloqueos 'SELECT bloqueado.pid, bloqueado.usename, pg_blocking_pids(bloqueado.pid) AS bloqueado_por, now() - bloqueado.query_start AS espera, left(bloqueado.query, 80) AS consulta FROM pg_stat_activity bloqueado WHERE cardinality(pg_blocking_pids(bloqueado.pid)) > 0;'
+-- Consultas más lentas (requiere pg_stat_statements: lo deja listo install-postgresql.sh)
+\set lentas 'SELECT calls AS llamadas, round(total_exec_time::numeric, 1) AS total_ms, round(mean_exec_time::numeric, 1) AS media_ms, rows AS filas, left(query, 80) AS consulta FROM pg_stat_statements ORDER BY total_exec_time DESC LIMIT 20;'
+-- Las 20 tablas e índices más grandes de la base actual
+\set tamanos 'SELECT n.nspname AS esquema, c.relname AS nombre, CASE c.relkind WHEN ''r'' THEN ''tabla'' WHEN ''i'' THEN ''índice'' WHEN ''m'' THEN ''vista materializada'' ELSE c.relkind::text END AS tipo, pg_size_pretty(pg_total_relation_size(c.oid)) AS tamano FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname NOT IN (''pg_catalog'', ''information_schema'') AND n.nspname !~ ''^pg_toast'' AND c.relkind IN (''r'', ''i'', ''m'') ORDER BY pg_total_relation_size(c.oid) DESC LIMIT 20;'
+-- Bases de datos del servidor, con su tamaño
+\set bases 'SELECT datname AS base, pg_get_userbyid(datdba) AS dueno, pg_size_pretty(pg_database_size(datname)) AS tamano FROM pg_database WHERE NOT datistemplate ORDER BY pg_database_size(datname) DESC;'
+-- Índices que nunca se han usado (sin los únicos ni las claves primarias)
+\set indices_sin_uso 'SELECT s.schemaname AS esquema, s.relname AS tabla, s.indexrelname AS indice, pg_size_pretty(pg_relation_size(s.indexrelid)) AS tamano FROM pg_stat_user_indexes s JOIN pg_index i ON i.indexrelid = s.indexrelid WHERE s.idx_scan = 0 AND NOT i.indisunique ORDER BY pg_relation_size(s.indexrelid) DESC;'
+-- Proporción de lecturas servidas desde la caché (en desarrollo, debería pasar de 99 %)
+\set cache 'SELECT ''tablas'' AS de, round(100.0 * sum(heap_blks_hit) / nullif(sum(heap_blks_hit) + sum(heap_blks_read), 0), 2) AS porcentaje FROM pg_statio_user_tables UNION ALL SELECT ''índices'', round(100.0 * sum(idx_blks_hit) / nullif(sum(idx_blks_hit) + sum(idx_blks_read), 0), 2) FROM pg_statio_user_indexes;'
+-- Tablas con más filas muertas y su último VACUUM y ANALYZE
+\set vacuum 'SELECT schemaname AS esquema, relname AS tabla, n_live_tup AS vivas, n_dead_tup AS muertas, greatest(last_vacuum, last_autovacuum) AS ultimo_vacuum, greatest(last_analyze, last_autoanalyze) AS ultimo_analyze FROM pg_stat_user_tables ORDER BY n_dead_tup DESC LIMIT 20;'
+-- Ajustes del servidor que no tienen su valor por defecto
+\set ajustes 'SELECT name AS ajuste, setting AS valor, unit AS unidad, source AS origen FROM pg_settings WHERE source NOT IN (''default'', ''override'') ORDER BY name;'
+-- Versión y tiempo desde el arranque del servidor
+\set servidor 'SELECT version() AS version, now() - pg_postmaster_start_time() AS encendido;'
+\set ayuda '\\echo \'Atajos: :actividad :bloqueos :lentas :tamanos :bases :indices_sin_uso :cache :vacuum :ajustes :servidor\''
+
+\unset QUIET

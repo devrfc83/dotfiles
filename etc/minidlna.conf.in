@@ -1,0 +1,49 @@
+# Plantilla de /etc/minidlna.conf para MiniDLNA 1.3 de Fedora. No se copia tal
+# cual: scripts/install-minidlna.sh reemplaza los marcadores (entre arrobas) con
+# los datos del equipo y la instala (lo ejecuta fedora-install.sh). Para cambiar
+# un ajuste, debe editarse aquí y volver a ejecutarse el script. Este primer
+# bloque de comentarios no se copia: el script pone su propio encabezado.
+
+# ── Red ───────────────────────────────────────────────────────────────────────
+# Puerto HTTP (descripciones, SOAP y transferencia de medios). firewalld lo abre
+# con el servicio minidlna, junto con 1900/udp (SSDP, el descubrimiento).
+port=8200
+# Interfaces físicas de NetworkManager (Ethernet y Wi-Fi) y lo, para clientes del
+# mismo equipo; sin los puentes de Docker ni de libvirt. MiniDLNA vigila las
+# interfaces: una desconectada se usa cuando se conecta.
+network_interface=@NETWORK_INTERFACE@
+max_connections=50
+
+# ── Identidad ─────────────────────────────────────────────────────────────────
+user=minidlna
+friendly_name=@FRIENDLY_NAME@
+model_name=@FRIENDLY_NAME@
+model_number=1
+# Derivado de /etc/machine-id: distinto en cada equipo
+serial=@SERIAL@
+
+# ── Medios ────────────────────────────────────────────────────────────────────
+# Carpetas XDG del usuario (xdg-user-dir), una por tipo: A audio, V vídeo, P imágenes
+media_dir=A,@MEDIA_MUSIC@
+media_dir=V,@MEDIA_VIDEOS@
+media_dir=P,@MEDIA_PICTURES@
+merge_media_dirs=no
+root_container=.
+# Sin seguir enlaces simbólicos que salgan de las carpetas anteriores
+wide_links=no
+# Detecta solo los archivos nuevos, cambiados o borrados
+inotify=yes
+album_art_names=Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg
+force_sort_criteria=+upnp:class,+upnp:originalTrackNumber,+dc:title
+enable_subtitles=yes
+
+# ── Base de datos y registros (rutas del paquete de Fedora) ───────────────────
+db_dir=/var/cache/minidlna
+log_dir=/var/log/minidlna
+log_level=general,artwork,database,inotify,scanner,metadata,http,ssdp,tivo=warn
+
+# ── Anuncios y compatibilidad ─────────────────────────────────────────────────
+# Anuncio SSDP cada minuto (Fedora: 900 s), para que los clientes lo vean antes
+notify_interval=60
+strict_dlna=no
+enable_tivo=no
