@@ -1,0 +1,74 @@
+#!/usr/bin/env zsh
+
+alias cdtemp="if [ ! -d $TEMPDIR ]; then mkdir $TEMPDIR; fi; cd $TEMPDIR"
+alias cl=clear
+alias cls=clear
+alias deltemp="cd $HOME; rm -rf $TEMPDIR"
+alias dirsize="for dir in *; do if [ -d \$dir ]; then du -hsL \$dir; fi; done"
+alias fixperms="find . -type d -exec chmod 0750 {} \\; && find . -type f -exec chmod 0644 {} \\;"
+alias fixpermsrestrict="find . -type d -exec chmod 0700 {} \\; && find . -type f -exec chmod 0600 {} \\;"
+alias fuck="sudo \$(fc -ln -1)"
+alias grep="grep --color"
+alias h="history"
+alias hist="history"
+alias home="cd $HOME"
+alias l="/bin/ls -lFh $LS_OPTIONS"
+alias la="/bin/ls -lAFh $LS_OPTIONS"
+alias ll="/bin/ls -la $LS_OPTIONS"
+alias ls="/bin/ls $LS_OPTIONS"
+alias mate="$EDITOR"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+alias please='sudo $(fc -ln -1)'
+alias rm="rm -i"
+alias rmemptydirs="find . -type d -empty -delete"
+alias rmemptyfiles="find . -type f -empty -delete"
+alias root="sudo su -"
+alias shit="sudo \$(fc -ln -1)"
+alias taildev="tail -f log/development.log"
+alias tailprod="tail -f log/production.log"
+alias www="python -m http.server 8000"
+alias zshconfig="$EDITOR $HOME/.zshrc"
+alias zshreload="source $HOME/.zshrc"
+
+if (( $+commands[pgcli] )); then
+  alias pg="pgcli"
+fi
+
+if (( $+commands[pg_format] )); then
+  alias pgfmt="pg_format"
+fi
+
+if (( $+commands[eza] )); then
+    alias ls="eza --group-directories-first --icons=auto"
+    alias l="eza -lF --group-directories-first --icons=auto"
+    alias la="eza -laF --group-directories-first --icons=auto"
+    alias ll="eza -la --group-directories-first --icons=auto"
+fi
+
+if (( $+commands[fzf] )); then
+  if (( $+commands[bat] )); then
+    alias fzfp="fzf --preview 'bat --style=numbers --color=always {}'"
+  elif (( $+commands[batcat] )); then
+    alias fzfp="fzf --preview 'batcat --style=numbers --color=always {}'"
+  else
+    alias fzfp="fzf --preview 'cat {}'"
+  fi
+fi
+
+if (( $+commands[fd] )); then
+  alias fdh="fd --hidden --follow --exclude .git"
+fi
+
+if (( $+commands[bat] )); then
+  alias bcat="bat --style=plain --paging=never"
+elif (( $+commands[batcat] )); then
+  alias bcat="batcat --style=plain --paging=never"
+fi
+
+if (( $+commands[eza] )); then
+  alias ezal="eza -la --group-directories-first --icons=auto"
+fi
+
+if (( $+commands[direnv] )); then
+  alias denv="direnv allow"
+fi

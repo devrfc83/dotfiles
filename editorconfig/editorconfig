@@ -1,0 +1,98 @@
+# EditorConfig: https://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 132
+tab_width = 4
+trim_trailing_whitespace = true
+
+[*.{csv,tsv}]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+[*.{md,mdown,markdown}]
+max_line_length = 80
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+[*.{yaml,yml}]
+indent_size = 2
+insert_final_newline = false
+
+[*.{htm,html,xml,xsl,xslt}]
+indent_style = tab
+insert_final_newline = false
+
+[*.{bash,sh,zsh}]
+indent_size = 2
+
+[*.{c,c++,cc,cpp,cxx,h,h++,hh,hpp,hs,hxx}]
+indent_size = 4
+
+[*.{ajs,ats,cjs,cts,js,jsx,mjs,mts,rjs,rts,ts,tsx,vue}]
+indent_size = 2
+quote_type = single
+
+[*.{css,json,less,sass,scss}]
+indent_size = 2
+
+[*.{sql,pgsql,psql}]
+indent_size = 4
+
+[*.php]
+indent_size = 4
+quote_type = single
+
+[*.blade.php]
+indent_size = 4
+quote_type = single
+
+[*.toml]
+indent_size = 2
+
+[*.rs]
+indent_size = 4
+
+[*.{vala,vapi}]
+indent_size = 4
+
+[{meson.build,meson.options}]
+indent_size = 4
+
+[*.py]
+indent_size = 4
+
+[*.dart]
+indent_size = 2
+
+[*.typ]
+indent_size = 2
+
+[*.{pem,key,crt,csr}]
+insert_final_newline = false
+
+[.editorconfig]
+indent_size = unset
+indent_style = unset
+
+[{M,m}akefile]
+indent_size = unset
+indent_style = tab
+insert_final_newline = false
+
+[Procfile]
+indent_size = unset
+indent_style = tab
+insert_final_newline = false
+
+[devcontainer.json]
+indent_style = tab
+
+[docker-compose.yml]
+indent_size = 2

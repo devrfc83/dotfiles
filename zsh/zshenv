@@ -1,0 +1,106 @@
+#!/usr/bin/env zsh
+
+# Setting up path
+PATH="/sbin:$PATH"
+PATH="/usr/sbin:$PATH"
+PATH="/usr/local/sbin:$PATH"
+PATH="/bin:$PATH"
+PATH="/usr/bin:$PATH"
+PATH="/usr/local/bin:$PATH"
+PATH="/opt/llama.cpp/bin:$PATH"
+PATH="$HOME/.bin:$PATH"
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+  . "$HOME/.cargo/env"
+elif [[ -d "$HOME/.cargo/bin" ]]; then
+  PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+PATH="$HOME/.composer/vendor/bin:$PATH"
+
+export PATH
+
+if [[ -n $SSH_TTY ]]; then
+    export EDITOR="/usr/bin/vim"
+else
+    export EDITOR="/usr/bin/codium --wait"
+fi
+
+# Setting up PostgreSQL variables
+: "${PGHOST:=localhost}"
+: "${PGPORT:=5432}"
+: "${PGUSER:=developer}"
+: "${PGPASSWORD:=developer}"
+: "${PGDATABASE:=development}"
+export PGHOST PGPORT PGUSER PGPASSWORD PGDATABASE
+
+zstyle ':omz:update' mode auto
+zstyle ':omz:update' frequency 15
+
+# Setting up variables
+export ARCHFLAGS="-arch x86_64"
+export CASE_SENSITIVE="false"
+export CLICOLOR=1
+export COLORTERM="truecolor"
+export CSHEDIT="/usr/bin/vim"
+export COMPLETION_WAITING_DOTS="true"
+export DIRSTACKSIZE=64
+export DISABLE_AUTO_TITLE="true"
+export DISABLE_LS_COLORS="false"
+export DISABLE_MAGIC_FUNCTIONS="false"
+export DISABLE_UNTRACKED_FILES_DIRTY="true"
+export ENABLE_CORRECTION="true"
+export FZF_DEFAULT_OPTS='--color=fg:#eeeeec,bg:#2e3436,hl:#729fcf --color=fg+:#eeeeec,bg+:#555753,hl+:#3465a4 --color=info:#c4a000,prompt:#3465a4,pointer:#cc0000 --color=marker:#4e9a06,spinner:#c4a000,header:#729fcf'
+export HISTCONTROL="ignoreboth"
+export HISTFILE="$HOME/.zsh_history"
+export HISTFILESIZE=99999
+export HISTSIZE=99999
+export HIST_STAMPS="yyyy-mm-dd"
+export HYPHEN_INSENSITIVE="false"
+export MAILCHECK=60
+export LESS_TERMCAP_mb=$'\e[1;31m'
+export LESS_TERMCAP_md=$'\e[1;34m'
+export LESS_TERMCAP_so=$'\e[01;44;37m'
+export LESS_TERMCAP_us=$'\e[01;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LS_OPTIONS='--color=always'
+export MANPAGER="/usr/bin/most"
+export MANPATH="/usr/local/man:/usr/share/man:$MANPATH"
+export MANPATHISSET="yes"
+export QUOTING_STYLE="literal"
+export PAGER="/usr/bin/most"
+export SAVEHIST=99999
+export SSH_KEY_PATH="$HOME/.ssh/id_ed25519"
+export TEMPDIR="$HOME/.tmp/"
+export VISUAL="/usr/bin/vim"
+export ZSH_COMPDUMP="$ZSH/cache/.zcompdump-$HOST"
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_THEME="pygmalion"
+
+# npm: configuración pública en el repo + credenciales fuera del repo
+#
+# npm no soporta "include" dentro de npmrc. Se genera un archivo efectivo
+# combinando base + privado, y se exporta como userconfig.
+if command -v npm >/dev/null 2>&1; then
+    npm_base="$HOME/.npmrc"
+    npm_private="$HOME/.config/npm/npmrc-private"
+    npm_effective="$HOME/.config/npm/npmrc-effective"
+
+    if [[ -f "$npm_base" ]]; then
+        if [[ -f "$npm_private" ]]; then
+            {
+                cat "$npm_base"
+                echo
+                cat "$npm_private"
+            } > "$npm_effective"
+            chmod 600 "$npm_effective" 2>/dev/null || true
+            export NPM_CONFIG_USERCONFIG="$npm_effective"
+        else
+            export NPM_CONFIG_USERCONFIG="$npm_base"
+        fi
+    fi
+fi

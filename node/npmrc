@@ -1,0 +1,5 @@
+registry=https://registry.npmjs.org/
+save-exact=true
+legacy-peer-deps=false
+progress=true
+cache=~/.npm-cache

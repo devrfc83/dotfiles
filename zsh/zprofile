@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+# Login-shell specific settings
+
+# Load system profile if available
+[[ -f /etc/profile ]] && source /etc/profile
