@@ -1,0 +1,222 @@
+[user]
+    name = "Rodrigo Fuentealba Cartes"
+    email = "121529607+devrfc83@users.noreply.github.com"
+    signingkey = ~/.ssh/id_ed25519
+
+[gpg]
+    format = "ssh"
+
+[gpg "ssh"]
+    key = ~/.ssh/id_ed25519
+
+[github]
+    user = "devrfc83"
+    email = "121529607+devrfc83@users.noreply.github.com"
+
+[gist]
+    private = "no"
+
+[core]
+    attributesfile = "~/.gitattributes"
+    autocrlf = input
+    editor = "/usr/bin/codium --wait"
+    excludesfile = "~/.gitignore"
+    ignorecase = false
+    mergeoptions = "--no-edit"
+    pager = "most"
+    symlinks = true
+    trustctime = false
+    untrackedCache = true
+    whitespace = "space-before-tab,-indent-with-non-tab,trailing-space"
+
+[init]
+    defaultBranch = "main"
+
+[apply]
+    ignorewhitespace = "change"
+    whitespace = "fix"
+
+[commit]
+    gpgsign = true
+    verbose = true
+
+[branch]
+    autosetuprebase = "always"
+
+[column]
+    ui = auto
+
+[push]
+    default = "upstream"
+    rebase = true
+    followTags = true
+
+[pull]
+    rebase = false
+
+[rebase]
+    autosquash = true
+
+[color]
+    ui = auto
+
+[color "branch"]
+    current = "bold reverse #3465a4"
+    local = "#eeeeec"
+    plain =
+    remote = "#729fcf"
+
+[color "diff"]
+    commit =
+    context = "#eeeeec"
+    func = "#729fcf"
+    plain =
+    whitespace = "reverse #75507b"
+    meta = "bold #eeeeec"
+    frag = "bold reverse #3465a4"
+    old = "bold #cc0000"
+    new = "bold #4e9a06"
+
+[color "grep"]
+    context =
+    filename = "#c4a000"
+    function = "bold #c4a000"
+    linenumber = "#eeeeec"
+    match = "bold #cc0000"
+    selected =
+    separator =
+
+[color "interactive"]
+    error = "bold #cc0000"
+    header = "bold #eeeeec"
+    help = "#c4a000"
+    prompt = "bold #3465a4"
+
+[color "status"]
+    added = "bold #4e9a06"
+    changed = "#c4a000"
+    header = "bold #eeeeec"
+    localBranch = "bold #3465a4"
+    nobranch = "bold reverse #cc0000"
+    remoteBranch = "bold #729fcf"
+    unmerged = "bold reverse #75507b"
+    untracked = "bold #4e9a06"
+    updated = "bold #fcaf3e"
+
+[help]
+    format = "html"
+    autocorrect = 1
+
+[gitignore]
+    global = "~/.gitignore"
+
+[diff]
+    renames = "copies"
+    tool = "vscodium"
+
+[diff "astextplain"]
+    textconv = "astextplain"
+
+[difftool]
+    prompt = false
+    trustExitCode = false
+    keepBackup = false
+
+[difftool "vscodium"]
+    cmd = "/usr/bin/codium --wait --diff $LOCAL $REMOTE"
+
+[difftool "cursor"]
+    cmd = "cursor --wait --diff $LOCAL $REMOTE"
+
+[merge]
+    tool = "vscodium"
+    log = true
+    branchdesc = true
+
+[mergetool]
+    prompt = false
+    trustExitCode = false
+    keepBackup = false
+
+[mergetool "vscodium"]
+    cmd = "/usr/bin/codium --wait $MERGED"
+
+[pack]
+    packSizeLimit = 2g
+
+[filter "lfs"]
+    clean = "git-lfs clean -- %f"
+    smudge = "git-lfs smudge -- %f"
+    process = "git-lfs filter-process"
+    required = true
+
+[web]
+    browser = "/usr/bin/firefox"
+
+[url "git@github.com:devrfc83/"]
+    insteadOf = github://
+
+[url "ssh://git@codeberg.org/devrfc83/"]
+    insteadOf = codeberg://
+
+[alias]
+    new = init
+    a = add
+    all = add --all
+    b = branch
+    bd = branch -d
+    bl = blame
+    cdroot = !cd `git root`
+    ci = commit -S -s
+    cia = commit -S -s --amend
+    cie = commit -S -s --allow-empty
+    cian = commit -S -s --amend --no-edit
+    cl = clean -df
+    co = checkout
+    coo = checkout --ours
+    cot = checkout --theirs
+    d = rm
+    df = diff
+    dt = difftool
+    f = fetch
+    fa = fetch --all
+    fi = fetch --origin
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    ignored = ls-files --ignored --exclude-standard --others
+    l = log --pretty --oneline
+    lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --color --graph --abbrev-commit --
+    logp = log --pretty
+    m = merge
+    mt = mergetool
+    pl = pull
+    plo = pull origin
+    plom = pull origin main
+    plt = pull --dry-run
+    pr = pull --rebase
+    ps = push
+    psf = push --force
+    psu = push --set-upstream
+    rb = rebase
+    rba = rebase --abort
+    rbad = rebase --committer-date-is-author-date
+    rbc = rebase --continue
+    rbi = rebase -i
+    rbs = rebase --skip
+    rem = remote
+    rema = remote add
+    remr = remote remove
+    remotes = remote -v
+    rfc = "!TZ=UTC GIT_AUTHOR_DATE='1983-02-22 00:00:00 +0000' GIT_COMMITTER_DATE='1983-02-22 00:00:00 +0000' git cian --date='1983-02-22 00:00:00 +0000'"
+    s = status
+    st = stash
+    sta = stash apply
+    stc = stash clear
+    std = stash drop
+    stl = stash list
+    stp = stash pop
+    standup = shortlog --since=yesterday
+    sw = switch
+    uca = reset --soft HEAD@{1}
+    uc = reset HEAD^
+    unstage = reset HEAD --
+    who = shortlog -s -n --no-merges --

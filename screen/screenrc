@@ -1,0 +1,49 @@
+# ── General ───────────────────────────────────────────────────────────────────
+# Prefijo C-a (predeterminado de screen; coincide con tmux)
+startup_message off
+autodetach on
+maptimeout 10
+defscrollback 10000
+utf8 on
+term screen-256color
+vbell on
+vbell_msg "Campana en %t(%n)"
+activity "Actividad en %t(%n)"
+number 1
+shelltitle '|%n:%t|'
+
+# ── Clima (wttr.in, Talca) ─────────────────────────────────────────────────────
+backtick 1 900 900 curl -sf --user-agent curl 'wttr.in/Talca?format=3&lang=es' 2>/dev/null
+
+# ── CPU / RAM (aprox. a los plugins tmux-cpu / tmux-sensible) ─────────────────
+backtick 2 5 5 sh -c "top -bn1 | awk '/^%Cpu/{gsub(/[^0-9.]/,\"\",\$8); printf \"%.0f%%\",100-\$8}'"
+backtick 3 5 5 sh -c "awk '/MemTotal/{t=\$2}/MemAvailable/{a=\$2} END{printf \"%.0f%%\",(t-a)/t*100}' /proc/meminfo"
+
+# ── Barra de estado (paleta Tango, como tmux) ─────────────────────────────────
+# kw=fondo oscuro, wb=ventana activa (azul Tango #3465a4), g/c/y/w=acentos
+hardstatus alwayslastline
+hardstatus string '%{= kw} %S %{= kw}|%{g} %`2` %{= kw}|%{c} %`3` %{= kw}|%{y} %`1` %{= kw}|%{w} %d-%b %H:%M '
+
+caption always
+caption string '%{= kw} %n:%t %=%{= -w}%=%'
+
+# ── Regiones ──────────────────────────────────────────────────────────────────
+# screen no expone colores de borde de panel como tmux; los divisores usan el tema del terminal
+# No hay equivalente exacto a synchronize-panes (tmux C-a S / C-a s)
+
+# ── Enlaces de teclado (prefijo C-a) ──────────────────────────────────────────
+bind r source $HOME/.screenrc
+bind K kill
+bind | split -v
+bind - split
+bind h focus left
+bind j focus down
+bind k focus up
+bind l focus right
+
+# ── Ratón ─────────────────────────────────────────────────────────────────────
+mousetrack on
+
+# ── Modo copia (vi) y portapapeles ────────────────────────────────────────────
+markkeys "h=^B:l=^F:0=0:$=$:j=+1:k=-1"
+bindkey -m y eval 'writebuf "sh -c \"xclip -in -selection clipboard\""'

@@ -1,0 +1,85 @@
+#!/usr/bin/env zsh
+
+zmodload zsh/terminfo
+
+# -------------------------------------------------
+# Enable vi‑style line editing
+# -------------------------------------------------
+bindkey -v                     # switch Zsh to vi mode
+
+# -------------------------------------------------
+# History‑substring‑search (like ↑/↓ in Vim)
+# -------------------------------------------------
+# You already have the plugin installed – the
+# following bindings make the familiar j/k work.
+bindkey "$terminfo[kcuu1]" history-substring-search-up   # Up‑arrow
+bindkey "$terminfo[kcud1]" history-substring-search-down # Down‑arrow
+
+# In vi command mode (the mode you get after pressing ESC)
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+bindkey -M vicmd 'h' backward-char
+bindkey -M vicmd 'l' forward-char
+
+bindkey -M vicmd 'b' backward-word
+bindkey -M vicmd 'w' forward-word
+
+bindkey -M vicmd '0' beginning-of-line
+bindkey -M vicmd '$' end-of-line
+
+bindkey -M vicmd 'x' kill-char
+bindkey -M vicmd 'dw' kill-word
+bindkey -M vicmd 'db' backward-kill-word
+bindkey -M vicmd 'd$' kill-line
+
+bindkey -M vicmd 'yy' copy-region-as-kill
+bindkey -M vicmd 'p' yank
+
+# -------------------------------------------------
+# Optional: make the vi insert mode behave like the
+# default Emacs bindings (so you still have Ctrl‑A,
+# Ctrl‑E, etc.) – just keep the default bindings.
+# -------------------------------------------------
+bindkey -M viins '^A' beginning-of-line
+bindkey -M viins '^E' end-of-line
+
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+setopt ALWAYS_TO_END
+setopt AUTO_CD
+setopt AUTO_MENU
+setopt AUTO_PARAM_SLASH
+setopt AUTO_PUSHD
+setopt CDABLE_VARS
+setopt CLOBBER_EMPTY
+setopt COMPLETE_ALIASES
+setopt COMPLETE_IN_WORD
+setopt CORRECT
+setopt EXTENDED_GLOB
+setopt EXTENDED_HISTORY
+setopt GLOB_COMPLETE
+setopt HIST_ALLOW_CLOBBER
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FCNTL_LOCK
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_LEX_WORDS
+setopt HIST_NO_FUNCTIONS
+setopt HIST_NO_STORE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_BY_COPY
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
+setopt IGNORE_EOF
+setopt INC_APPEND_HISTORY_TIME
+setopt NO_BEEP
+setopt NO_BG_NICE
+setopt NO_HIST_BEEP
+setopt NO_HUP
+setopt NO_LIST_BEEP
+setopt NO_MATCH
+setopt NOTIFY
+setopt PROMPT_SUBST
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_TO_HOME

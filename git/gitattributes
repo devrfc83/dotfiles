@@ -1,0 +1,238 @@
+*                   text=auto
+
+# CSV
+*.csv               text eol=lf diff=csv linguist-language=CSV
+*.tsv               text eol=lf diff=csv linguist-language=CSV
+
+# Markdown
+*.md                text eol=lf diff=markdown linguist-language=Markdown
+*.mdown             text eol=lf diff=markdown linguist-language=Markdown
+*.markdown          text eol=lf diff=markdown linguist-language=Markdown
+
+# YAML
+*.yaml              text eol=lf diff=yaml linguist-language=YAML
+*.yml               text eol=lf diff=yaml linguist-language=YAML
+
+# XML
+*.xml               text eol=lf diff=xml linguist-language=XML
+
+# Scripting
+*.bat               text eol=crlf diff=bat linguist-language=Batchfile
+*.ini               text eol=crlf diff=ini linguist-language=INI
+*.ps1               text eol=lf diff=powershell linguist-language=PowerShell
+*.bash              text eol=lf diff=sh linguist-language=Shell
+*.sh                text eol=lf diff=sh linguist-language=Shell
+*.zsh               text eol=lf diff=sh linguist-language=Shell
+*.env               text eol=lf diff=dotenv linguist-language=Shell
+*.env.example       text eol=lf diff=dotenv linguist-language=Shell
+Procfile            text eol=lf linguist-language=Shell
+
+# C
+*.c                 text eol=lf diff=c linguist-language=C
+*.c++               text eol=lf diff=cpp linguist-language=C++
+*.cc                text eol=lf diff=cpp linguist-language=C++
+*.cpp               text eol=lf diff=cpp linguist-language=C++
+*.cxx               text eol=lf diff=cpp linguist-language=C++
+*.h                 text eol=lf diff=c linguist-language=C
+*.h++               text eol=lf diff=cpp linguist-language=C++
+*.hh                text eol=lf diff=cpp linguist-language=C++
+*.hpp               text eol=lf diff=cpp linguist-language=C++
+*.hxx               text eol=lf diff=cpp linguist-language=C++
+Makefile            text eol=lf diff=makefile linguist-language=Makefile
+makefile            text eol=lf diff=makefile linguist-language=Makefile
+
+# HTML
+*.html              text eol=lf diff=html linguist-language=HTML
+*.htm               text eol=lf diff=html linguist-language=HTML
+*.xhtml             text eol=lf diff=html linguist-language=HTML
+*.svg               text eol=lf diff=svg  linguist-language=SVG
+
+# CSS
+*.css               text eol=lf diff=css linguist-language=CSS
+*.sass              text eol=lf diff=sass linguist-language=Sass
+*.scss              text eol=lf diff=scss linguist-language=SCSS
+*.less              text eol=lf diff=less linguist-language=LESS
+
+# JavaScript
+*.ajs               text eol=lf diff=javascript linguist-language=JavaScript
+*.cjs               text eol=lf diff=javascript linguist-language=JavaScript
+*.mjs               text eol=lf diff=javascript linguist-language=JavaScript
+*.js                text eol=lf diff=javascript linguist-language=JavaScript
+*.json              text eol=lf diff=json linguist-language=JSON
+*.jsx               text eol=lf diff=javascript linguist-language=JavaScript
+*.ats               text eol=lf diff=javascript linguist-language=TypeScript
+*.cts               text eol=lf diff=javascript linguist-language=TypeScript
+*.mts               text eol=lf diff=javascript linguist-language=TypeScript
+*.ts                text eol=lf diff=javascript linguist-language=TypeScript
+*.tsx               text eol=lf diff=javascript linguist-language=TypeScript
+*.vue               text eol=lf diff=javascript linguist-language=JavaScript
+*.d.ts              text eol=lf diff=javascript linguist-language=TypeScript
+
+# PHP
+*.php               text eol=lf diff=php linguist-language=PHP
+vendor/*            linguist-vendored
+
+# Laravel
+*.blade.php         text eol=lf diff=html linguist-language=PHP
+
+# Python
+*.py                text eol=lf diff=python linguist-language=Python
+*.pyw               text eol=lf diff=python linguist-language=Python
+
+# Rust
+*.rs                text eol=lf diff=rust linguist-language=Rust
+
+# Go
+*.go                text eol=lf diff=golang linguist-language=Go
+go.mod              text eol=lf diff=golang linguist-language=Go
+go.sum              text eol=lf diff=golang linguist-language=Go -diff
+go.work             text eol=lf diff=golang linguist-language=Go
+go.work.sum         text eol=lf diff=golang linguist-language=Go -diff
+
+# Vala
+*.vala              text eol=lf linguist-language=Vala
+*.vapi              text eol=lf linguist-language=Vala
+meson.build         text eol=lf linguist-language=Meson
+meson_options.txt   text eol=lf linguist-language=Meson
+*.desktop           text eol=lf diff=ini linguist-language=INI
+*.gresource.xml     text eol=lf diff=xml linguist-language=XML
+
+# Java
+*.java              text eol=lf diff=java linguist-language=Java
+*.properties        text eol=lf diff=java linguist-language=Java
+
+# Perl
+*.pl                text eol=lf diff=perl linguist-language=Perl
+
+# SQL
+*.sql               text eol=lf diff=sql linguist-language=SQL
+*.pgsql             text eol=lf diff=sql linguist-language=SQL
+*.psql              text eol=lf diff=sql linguist-language=SQL
+
+# Binarios
+*.exe               binary
+*.dll               binary
+*.so                binary
+*.pyc               binary
+
+# Documentación
+AUTHORS             text eol=lf
+CHANGELOG           text eol=lf
+CHANGES             text eol=lf
+CONTRIBUTING        text eol=lf
+COPYING             text eol=lf
+INSTALL             text eol=lf
+license             text eol=lf
+LICENSE             text eol=lf
+NEWS                text eol=lf
+readme              text eol=lf
+*README*            text eol=lf
+TODO                text eol=lf
+
+# Imágenes
+*.avif              binary
+*.ai                binary
+*.bmp               binary
+*.eps               binary
+*.gif               binary
+*.heic              binary
+*.heif              binary
+*.ico               binary
+*.jpg               binary
+*.jpeg              binary
+*.pdf               binary
+*.png               binary
+*.psd               binary
+*.svgz              binary
+*.tif               binary
+*.tiff              binary
+*.wbmp              binary
+*.webp              binary
+
+# Audio
+*.kar               binary
+*.m4a               binary
+*.mid               binary
+*.midi              binary
+*.mp3               binary
+*.ogg               binary
+
+# Video
+*.flv               binary
+*.m4v               binary
+*.mov               binary
+*.mp4               binary
+*.mpeg              binary
+*.mpg               binary
+*.webm              binary
+
+# Archivos comprimidos
+*.7z                binary
+*.7zip              binary
+*.bz2               binary
+*.dmg               binary
+*.gz                binary
+*.rar               binary
+*.tar               binary
+*.tar.bz2           binary
+*.tar.gz            binary
+*.tar.xz            binary
+*.tgz               binary
+*.txz               binary
+*.zip               binary
+*.Z                 binary
+
+# Tipografías
+*.eot               binary
+*.otf               binary
+*.ttf               binary
+*.woff              binary
+*.woff2             binary
+
+# Archivos de Microsoft Office
+*.doc               binary
+*.docx              binary
+*.xls               binary
+*.xlsx              binary
+*.ppt               binary
+*.pptx              binary
+
+# Datos
+*.db                binary
+*.parquet           binary
+*.sqlite            binary
+
+# Configuración
+.editorconfig       text eol=lf diff=editorconfig
+.env                text eol=lf diff=dotenv
+.eslintrc           text eol=lf diff=javascript
+.gitattributes      text eol=lf diff=gitattributes
+.gitconfig          text eol=lf diff=gitconfig
+.gitignore          text eol=lf diff=gitignore
+.htaccess           text eol=lf diff=htaccess
+eslint.config.js    text eol=lf diff=javascript
+.prettierrc         text eol=lf diff=javascript
+composer.json       text eol=lf diff=json linguist-language=JSON
+composer.lock       text eol=lf diff=json linguist-language=JSON -diff
+package-lock.json   text eol=lf diff=json linguist-language=JSON -diff
+*.cnf               text eol=lf diff=ini
+*.conf              text eol=lf diff=ini
+*.config            text eol=lf diff=ini
+*.lock              text eol=lf
+*.npmignore         text eol=lf diff=npmignore
+*.toml              text eol=lf diff=toml linguist-language=TOML
+
+# Docker
+Dockerfile          text eol=lf
+*.dockerignore      text eol=lf
+*.dockerfile        text eol=lf
+
+# Seguridad
+*.pem               text eol=lf
+*.key               text eol=lf
+*.crt               text eol=lf
+*.csr               text eol=lf
+
+# GitHub
+.github             export-ignore
+.styleci.yml        export-ignore

@@ -1,0 +1,93 @@
+#!/usr/bin/env zsh
+
+fff() {
+  [ -n "$1" ] || { echo "Usage: fff <pattern>"; return 1; }
+  find . -iname "*$1*"
+}
+
+ggg() {
+  grep -ri "$1" .;
+}
+
+extractfile() {
+  if [ -f "$1" ]; then
+    case "$1" in
+      *.tar.bz2)          tar xjf "$1" ;;
+      *.tar.gz)           tar xzf "$1" ;;
+      *.bz2)              bunzip2 "$1" ;;
+      *.rar)              unrar x "$1" ;;
+      *.gz)               gunzip "$1" ;;
+      *.tar)              tar xv "$1" ;;
+      *.tbz2)             tar xjf "$1" ;;
+      *.tgz)              tar xzf "$1" ;;
+      *.zip)              unzip "$1" ;;
+      *.Z)                uncompress "$1" ;;
+      *.7z)               7z x "$1" ;;
+      *.xz)               xz -d "$1" ;;
+      *.zst)              zstd -d "$1" ;;
+      *)                  echo "'$1' cannot be extracted via extractfile()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file."
+  fi
+}
+
+psgrep() {
+  if [ -n "$1" ]; then
+    echo "Grepping for processes matching $1..."
+    ps aux | grep -i -- "$1" | grep -v grep
+  else
+    echo "!! Need name to grep for"
+  fi
+}
+
+flip() {
+  perl -C3 -Mutf8 -lpe '$_=reverse;y/a-zA-Z.['\'',({?!\"<_;‿⁅∴\r/ɐqɔpǝɟƃɥıɾʞ|ɯuodbɹsʇnʌʍxʎzɐqɔpǝɟƃɥıɾʞ|ɯuodbɹsʇnʌʍxʎz˙],'\'')}¿¡,>‾؛⁀⁆∵\n/' <<< "$1"
+}
+
+pgstart() {
+    sudo systemctl start postgresql
+}
+
+pgstop() {
+    sudo systemctl stop postgresql
+}
+
+pgstatus() {
+    sudo systemctl status postgresql
+}
+
+pglog() {
+    journalctl -u postgresql -f
+}
+
+psqlx() {
+  if ! command -v psql >/dev/null 2>&1; then
+    echo "psql command not found."
+    return 1
+  fi
+
+  psql \
+    --host "${PGHOST:-localhost}" \
+    --port "${PGPORT:-5432}" \
+    --username "${PGUSER:-developer}" \
+    --dbname "${PGDATABASE:-development}"
+}
+
+lintsh() {
+  if ! command -v shellcheck >/dev/null 2>&1; then
+    echo "shellcheck command not found."
+    return 1
+  fi
+
+  shellcheck "$@"
+}
+
+fmtsh() {
+  if ! command -v shfmt >/dev/null 2>&1; then
+    echo "shfmt command not found."
+    return 1
+  fi
+
+  shfmt -w "$@"
+}

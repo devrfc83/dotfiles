@@ -1,0 +1,165 @@
+syntax on
+
+packadd! nerdtree
+packadd! nerdcommenter
+packadd! fugitive
+packadd! editorconfig
+packadd! surround
+packadd! vim-snippets
+packadd! ultisnips
+packadd! youcompleteme
+packadd! emmet-vim
+packadd! highlightedyank
+packadd! easyalign
+packadd! easymotion
+packadd! gitgutter
+packadd! undotree
+packadd! airline
+packadd! endwise
+packadd! vim-test
+packadd! ale
+
+filetype plugin on
+
+set autoindent
+set backspace=indent,eol,start
+set backupdir=~/.vim/backup//
+set clipboard=unnamedplus
+set cursorline
+set directory=~/.vim/swap//
+set encoding=utf-8
+set hlsearch
+set ignorecase
+set smartcase
+set laststatus=2
+set lazyredraw
+set mouse=a
+set nowrap
+set number relativenumber
+set ruler
+set scrolloff=8
+set showmatch
+set showmode
+set splitbelow
+set splitright
+set timeoutlen=500
+set undofile
+set undodir=~/.vim/undodir
+set updatetime=300
+set visualbell
+set wildmode=list:longest,longest:full
+
+set t_Co=256
+set termguicolors
+
+colorscheme cobalt
+
+set statusline=%f
+set statusline+=%h
+set statusline+=%m
+set statusline+=%r
+set statusline+=\ [%{&ff}]
+set statusline+=\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})
+set statusline+=%=
+set statusline+=%l,%c%V
+set statusline+=\ %P
+
+set wildignore+=cache/*
+set wildignore+=node_modules/*
+set wildignore+=versions/*
+set wildignore+=vendor/*
+
+if has("autocmd")
+    autocmd BufWritePre *.html *.css *.js *.ts %s/\s\+$//e
+    autocmd BufReadPre COMMIT_EDITMSG,MERGE_MSG,git-rebase-todo setlocal fileencodings=utf-8
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$")
+        \           && &filetype !~# 'commit\|gitrebase'
+        \           && expand("%") !~ "ADD_EDIT.patch"
+        \           && expand("%") !~ "addp-hunk-edit.diff" |
+        \   exe "normal g`\"" |
+        \ endif
+    autocmd BufNewFile,BufRead *.patch set filetype=diff
+    autocmd Filetype diff
+        \ highlight WhiteSpaceEOL ctermbg=red |
+        \ match WhiteSpaceEOL /\(^+.*\)\@<=\s\+$/
+endif
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+let mapleader = ","
+
+nnoremap <leader>h ^
+nnoremap <leader>l $
+nnoremap <leader>j 8j
+nnoremap <leader>k 8:k
+
+nnoremap <leader>/ :noh<CR>
+
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>s :split<CR>
+
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>ws <C-w>r
+nnoremap <leader>wS <C-w>R
+
+nnoremap <leader>+ :resize +3<CR>
+nnoremap <leader>- :resize -3<CR>
+nnoremap <leader>> :vertical resize +3<CR>
+nnoremap <leader>< :vertical resize -3<CR>
+
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>to :tabonly<CR>
+nnoremap <leader>tt :tabnext<CR>
+nnoremap <leader>tT :tabprev<CR>
+
+nnoremap <leader>nt :NERDTree<CR>
+
+nnoremap <leader>ut :UndotreeToggle<cr>
+
+let g:NERDCreateDefaultMappings = 1
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+let g:ycm_key_list_select_completion = ['<C-n>']
+let g:ycm_key_list_previous_completion = ['<C-p>']
+let g:ycm_key_list_accept_completion = ['<C-y>']
+let g:ycm_key_list_accept_completion_and_go_to_definition = []
+
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+let g:user_emmet_leader_key='<leader>e'
+nnoremap <silent> <leader>ee :EmmetExpand<CR>
+vnoremap <silent> <leader>ev :EmmetExpand<CR>
+vnoremap <silent> <leader>ew :EmmetWrap<CR>
+nnoremap <silent> <leader>eh :EmmetHelp<CR>
+
+let g:user_emmet_settings = {
+      \ 'html': {
+      \   'self_closing_tag_style': 'xml',
+      \ },
+      \ }
+
+let g:user_emmet_filetypes = 'html,css,scss,sass,less,javascript,jsx,tsx,vue,php'
+
+let g:test#strategy = 'vimterminal'
+
+nnoremap <leader>rt :TestNearest<CR>
+nnoremap <leader>rf :TestFile<CR>
+nnoremap <leader>rs :TestSuite<CR>
+nnoremap <leader>rl :TestLast<CR>
+nnoremap <leader>rv :TestVisit<CR>
+
+let g:ale_fix_on_save = 1

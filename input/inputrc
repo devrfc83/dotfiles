@@ -1,0 +1,110 @@
+# ~/.inputrc — Readline configuration
+# Applies to bash, zsh (when using readline), python REPL, and other readline-enabled programs.
+
+# ── Completion ──────────────────────────────────────────────────────────────
+
+# Case-insensitive tab completion (foo matches Foo, FOO, etc.)
+set completion-ignore-case on
+
+# Treat hyphens and underscores as equivalent during completion
+set completion-map-case on
+
+# Show completions immediately on first Tab (instead of requiring two presses)
+set show-all-if-ambiguous on
+
+# Don't ring the bell on ambiguous completion
+set bell-style none
+
+# Append a slash to completed directory names
+set mark-directories on
+set mark-symlinked-directories on
+
+# Show file type indicators in completion lists (like `ls -F`)
+set visible-stats on
+
+# Color completion matches by file type (uses $LS_COLORS)
+set colored-stats on
+
+# Highlight the common prefix in completion lists
+set colored-completion-prefix on
+
+# Don't complete hidden files unless the pattern explicitly starts with a dot
+set match-hidden-files off
+
+# If there are more than N possible completions, ask before listing them all
+set completion-query-items 200
+
+
+# ── History ─────────────────────────────────────────────────────────────────
+
+# Up/Down arrows search history based on what's already typed
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Same thing for vi-style j/k in case you switch modes
+"\C-p": history-search-backward
+"\C-n": history-search-forward
+
+# Don't duplicate adjacent identical entries when browsing history
+set history-preserve-point on
+
+
+# ── Editing ─────────────────────────────────────────────────────────────────
+
+# Use vi editing mode for readline-enabled programs
+set editing-mode vi
+
+# Use a visible cursor-position indicator rather than a bell
+set show-mode-in-prompt off
+
+# Allow UTF-8 input and output
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Skip over words with Ctrl+Left / Ctrl+Right (works in most terminals)
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+
+# Alt+Backspace — delete the previous word (standard, but handy to make explicit)
+"\e\177": backward-kill-word
+
+# Alt+d — delete the next word
+"\ed": kill-word
+
+# Ctrl+Backspace — alternative backward-kill-word for terminals that send ^H
+"\C-h": backward-kill-word
+
+# Ctrl+Delete — kill to end of line
+"\e[3;5~": kill-line
+
+# Home / End keys (ensure they work across terminal types)
+"\e[H":  beginning-of-line
+"\e[F":  end-of-line
+"\eOH":  beginning-of-line
+"\eOF":  end-of-line
+
+# Page Up / Page Down — history search
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+
+$if mode=vi
+  # Keep useful Emacs-style shortcuts while in vi insert mode
+  set keymap vi-insert
+  "\C-a": beginning-of-line
+  "\C-e": end-of-line
+  "\C-p": history-search-backward
+  "\C-n": history-search-forward
+$endif
+
+
+# ── Display ─────────────────────────────────────────────────────────────────
+
+# Expand the prompt to show the full path (avoids truncated display in long dirs)
+set expand-tilde on
+
+# Limit the width of completion display columns to the terminal width
+set print-completions-horizontally off
+
+# Show the actual characters of control sequences rather than escapes
+set echo-control-characters off
