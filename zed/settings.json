@@ -1,0 +1,44 @@
+// Configuración de Zed (~/.config/zed/settings.json, enlace a este archivo). Los
+// cambios hechos desde la interfaz se escriben aquí.
+{
+  // Tema Dracula (extensión oficial dracula/zed), como la terminal
+  "theme": "Dracula",
+
+  // Extensiones que Zed instala solo al abrirse. Rust, Python, TypeScript y Go
+  // vienen con Zed.
+  "auto_install_extensions": {
+    "dracula": true,
+    "dockerfile": true,
+    "php": true,
+    "sql": true,
+    "vala": true,
+    "xml": true,
+  },
+
+  // ── Fuentes ──────────────────────────────────────────────────────────────────
+  // Editor: FiraCode con ligaduras (=> != >= ->). Terminal integrada: variante
+  // Mono, porque trabaja en una cuadrícula de celdas, como Ptyxis.
+  "buffer_font_family": "FiraCode Nerd Font",
+  "terminal": {
+    "font_family": "FiraCode Nerd Font Mono",
+  },
+
+  // ── Longitud de línea (la de editorconfig: 132; Markdown: 80) ────────────────
+  // Regla y ajuste de línea visual en la misma columna.
+  "preferred_line_length": 132,
+  "soft_wrap": "bounded",
+  "languages": {
+    "Markdown": {
+      "preferred_line_length": 80,
+    },
+  },
+
+  // ── Formato al guardar ───────────────────────────────────────────────────────
+  "format_on_save": "on",
+
+  // ── Telemetría ───────────────────────────────────────────────────────────────
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+}

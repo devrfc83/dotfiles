@@ -1,0 +1,7 @@
+# Configuración solo para repos de Sea Dragon.
+# Se carga desde git/gitconfig mediante includeIf (según la URL del remoto).
+# Los commits se firman con la misma llave SSH; dotfiles-install.sh agrega este
+# correo a ~/.config/git/allowed_signers.
+
+[user]
+    email = "rfuentealba@seadragon.cl"

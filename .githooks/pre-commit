@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Antes de cada commit: ShellCheck, shfmt y sintaxis de zsh (scripts/lint.sh).
+# Lo activa scripts/dotfiles-install.sh con core.hooksPath. Para saltarlo en un
+# commit puntual: git commit --no-verify.
+
+exec "$(git rev-parse --show-toplevel)/scripts/lint.sh"
