@@ -1,0 +1,10 @@
+# Ajustes locales de rkhunter (/etc/rkhunter.conf.local, lo instala
+# scripts/fedora-install.sh; rkhunter lee este archivo después de /etc/rkhunter.conf).
+
+# sshd no permite entrar como root (etc/ssh/sshd_config.d/30-dotfiles.conf): que
+# rkhunter lo compruebe igual que la configuración de sshd
+ALLOW_SSH_ROOT_USER=no
+
+# Memoria compartida de aplicaciones (Adobe, PostgreSQL, lttng...): archivos de
+# datos en /dev/shm, que es normal que existan
+ALLOWDEVFILE=/dev/shm/*

@@ -1,0 +1,12 @@
+[Unit]
+Description=Mailpit: correo de desarrollo (SMTP en 1025, interfaz web en 8025)
+# Solo este equipo. Caddy lo publica además como https://mailpit.lvh.me
+# (etc/caddy/Caddyfile). El binario lo instala scripts/install-mailpit.sh; los
+# correos se guardan en la base de datos, así que sobreviven a los reinicios.
+
+[Service]
+ExecStart=%h/.local/bin/mailpit --smtp 127.0.0.1:1025 --listen 127.0.0.1:8025 --database %h/.local/share/mailpit/mailpit.db
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

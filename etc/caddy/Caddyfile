@@ -1,0 +1,54 @@
+# Caddy como proxy inverso local con HTTPS para los servidores de desarrollo.
+# Lo instala scripts/install-caddy.sh en /etc/caddy/Caddyfile (reemplaza al de
+# Fedora, que sirve /usr/share/caddy en el puerto 80 de todas las interfaces).
+# Los nombres *.lvh.me resuelven a 127.0.0.1 en el DNS público; install-caddy.sh
+# los agrega además a /etc/hosts, para que funcionen sin conexión. El certificado
+# es de mkcert (de confianza solo en este equipo); lo genera el mismo script.
+# Para agregar un nombre: un bloque más, y volver a ejecutar install-caddy.sh.
+
+{
+	# Solo este equipo: también el puerto 80, que redirige a HTTPS
+	default_bind 127.0.0.1
+}
+
+(proxy) {
+	tls /etc/caddy/certs/lvh.me.pem /etc/caddy/certs/lvh.me-key.pem
+	# localhost: Vite y otros escuchan a veces solo en ::1 (IPv6); Caddy prueba ambas
+	reverse_proxy localhost:{args[0]}
+}
+
+# php artisan serve
+laravel.lvh.me {
+	import proxy 8000
+}
+
+# php artisan reverb:start --port=9000 (WebSockets)
+reverb.lvh.me {
+	import proxy 9000
+}
+
+# Rails (bin/rails server, puerto 3000 por defecto; también Next.js y Nuxt)
+rails.lvh.me {
+	import proxy 3000
+}
+
+# Go (net/http, Gin...; 8080 por convención). Si se usa a la vez que Flutter,
+# uno de los dos debe cambiar de puerto
+go.lvh.me {
+	import proxy 8080
+}
+
+# Flutter web (flutter run -d web-server --web-port 8080)
+flutter.lvh.me {
+	import proxy 8080
+}
+
+# Sinatra (ruby app.rb, puerto 9292 por defecto)
+sinatra.lvh.me {
+	import proxy 9292
+}
+
+# Mailpit, el correo de desarrollo (systemd/mailpit.service)
+mailpit.lvh.me {
+	import proxy 8025
+}

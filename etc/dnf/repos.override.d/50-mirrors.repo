@@ -1,0 +1,40 @@
+# Mirrors fijos para los repositorios de Fedora y RPM Fusion (override de dnf5:
+# no modifica los .repo del sistema). Lo instala scripts/fedora-install.sh en
+# /etc/dnf/repos.override.d/. Para volver a los metalinks: borrar ese archivo.
+#
+# Fedora no tiene mirrors en Chile: br.mirrors.cicku.me (Cloudflare) fue el más
+# rápido desde Talca; le siguen fcix (EE. UU.) y CEDIA (Ecuador) como respaldo.
+# RPM Fusion: mirror.hnd.cl (Chile) y cicku como respaldo.
+# Los paquetes se siguen verificando con las llaves GPG (gpgcheck de cada .repo).
+
+[fedora]
+metalink=
+baseurl=https://br.mirrors.cicku.me/fedora/linux/releases/$releasever/Everything/$basearch/os/
+        https://southfront.mm.fcix.net/fedora/linux/releases/$releasever/Everything/$basearch/os/
+        https://mirror.cedia.org.ec/fedora/linux/releases/$releasever/Everything/$basearch/os/
+
+[updates]
+metalink=
+baseurl=https://br.mirrors.cicku.me/fedora/linux/updates/$releasever/Everything/$basearch/
+        https://southfront.mm.fcix.net/fedora/linux/updates/$releasever/Everything/$basearch/
+        https://mirror.cedia.org.ec/fedora/linux/updates/$releasever/Everything/$basearch/
+
+[rpmfusion-free]
+metalink=
+baseurl=https://mirror.hnd.cl/rpmfusion/free/fedora/releases/$releasever/Everything/$basearch/os/
+        https://br.mirrors.cicku.me/rpmfusion/free/fedora/releases/$releasever/Everything/$basearch/os/
+
+[rpmfusion-free-updates]
+metalink=
+baseurl=https://mirror.hnd.cl/rpmfusion/free/fedora/updates/$releasever/$basearch/
+        https://br.mirrors.cicku.me/rpmfusion/free/fedora/updates/$releasever/$basearch/
+
+[rpmfusion-nonfree]
+metalink=
+baseurl=https://mirror.hnd.cl/rpmfusion/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
+        https://br.mirrors.cicku.me/rpmfusion/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
+
+[rpmfusion-nonfree-updates]
+metalink=
+baseurl=https://mirror.hnd.cl/rpmfusion/nonfree/fedora/updates/$releasever/$basearch/
+        https://br.mirrors.cicku.me/rpmfusion/nonfree/fedora/updates/$releasever/$basearch/

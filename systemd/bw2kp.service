@@ -1,0 +1,13 @@
+[Unit]
+Description=Respaldo de Vaultwarden en KeePassXC (bw2kp)
+
+[Service]
+Type=oneshot
+# Hasta 30 s a que NetworkManager tenga conexión (network-online.target es del
+# sistema y el gestor de usuario no lo ve); si no, lo intenta igual
+ExecStartPre=-/usr/bin/nm-online -q -t 30
+# PATH mínimo: bw (npm con fnm) está en el alias default de fnm, que no cambia con la versión de Node
+Environment=PATH=%h/.local/share/fnm/aliases/default/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+# zsh carga ~/.zshenv, y este carga ~/.zshsecrets (BW_* y KP_*)
+ExecStart=/usr/bin/zsh -c 'exec %h/.local/bin/bw2kp'
+TimeoutStartSec=10min

@@ -1,0 +1,282 @@
+# Paquetes DNF (Fedora + RPM Fusion), uno por línea.
+# Las líneas vacías y las que empiezan con # se ignoran.
+# Lo leen scripts/fedora-install.sh y scripts/check-packages.sh.
+
+# ── Terminal ──────────────────────────────────────────────────────────────────
+# entr reejecuta una orden al cambiar archivos; httpie, peticiones HTTP legibles;
+# hyperfine mide tiempos; ncdu, uso de disco navegable; tealdeer es tldr; tokei
+# cuenta líneas de código; yq es jq para YAML
+bat
+direnv
+entr
+eza
+fastfetch
+fd-find
+fzf
+# Secretos en los repositorios: el hook global de git (git/hooks) y scripts/lint.sh
+gitleaks
+httpie
+hyperfine
+jq
+mc
+most
+ncdu
+pgcli
+pspg
+ripgrep
+screen
+tealdeer
+tmux
+tokei
+util-linux-script
+vim-enhanced
+vim-X11
+wl-clipboard
+xclip
+yq
+zoxide
+zsh
+
+# ── Monitores ─────────────────────────────────────────────────────────────────
+btop
+cava
+glances
+
+# ── Archivos y compresión ─────────────────────────────────────────────────────
+7zip
+bzip2
+gzip
+ncompress
+rsync
+tar
+unrar
+unzip
+wget2-wget
+xz
+zstd
+
+# ── Compilación y desarrollo ──────────────────────────────────────────────────
+# git-delta: diffs con resaltado (paginador de git, en git/gitconfig); tig: el
+# historial en la terminal
+autoconf
+automake
+blueprint-compiler
+cmake
+gcc
+gcc-c++
+git
+git-delta
+git-lfs
+glib2-devel
+golangci-lint
+gtk4-devel
+libadwaita-devel
+make
+meld
+meson
+ncurses-devel
+ninja-build
+openssl-devel
+perl
+ShellCheck
+shfmt
+tig
+uncrustify
+vala
+vala-language-server
+
+# ── Flutter y Android ─────────────────────────────────────────────────────────
+# Flutter, el Android SDK y Android Studio no están en Fedora: los instala
+# extras-install.sh. clang, gtk3-devel y xz-devel (liblzma) compilan las apps de
+# escritorio Linux (con cmake y ninja-build); el JDK lo usan sdkmanager y Gradle. El de Fedora es
+# Java 25, con el que no funciona Gradle: temurin-21-jdk viene del repositorio de
+# Adoptium (etc/yum.repos.d) y fedora-install.sh lo deja como JDK por defecto.
+# egl-utils trae eglinfo, con que flutter doctor revisa el driver gráfico.
+clang
+egl-utils
+gtk3-devel
+java-25-openjdk-devel
+temurin-21-jdk
+xz-devel
+
+# ── Python ────────────────────────────────────────────────────────────────────
+# uv: proyectos propios (entornos, dependencias y versiones de Python); pipx,
+# las herramientas globales
+pipx
+python3
+# ansible-lint revisa los playbooks de Ansible; yamllint, el YAML en general
+python3-ansible-lint
+python3-devel
+python3-passlib
+# pykeepass escribe la base KeePassXC que genera zsh/scripts/bw2kp.py
+python3-pykeepass
+python3-pip
+python3-virtualenv
+ruff
+uv
+yamllint
+
+# ── PHP y Composer ────────────────────────────────────────────────────────────
+# Nombres reales de los paquetes. Extensiones sin paquete propio: curl viene en
+# php-common; sqlite3 y pdo_sqlite, en php-pdo.
+composer
+php
+php-bcmath
+php-cli
+php-common
+php-fpm
+php-gd
+php-intl
+php-mbstring
+php-pdo
+php-pecl-imagick
+php-pecl-memcached
+php-pecl-pcov
+php-pecl-redis6
+php-pecl-xdebug3
+php-pecl-zip
+php-pgsql
+php-sodium
+php-xml
+
+# ── Bases de datos y cachés ───────────────────────────────────────────────────
+# pg_activity: top de PostgreSQL (conexiones, consultas, bloqueos)
+memcached
+pg_activity
+pgrouting
+postgis
+postgresql
+postgresql-contrib
+postgresql-plperl
+postgresql-plpython3
+postgresql-server
+sqlite
+valkey
+valkey-compat-redis
+
+# ── Contenedores, nube y despliegue ───────────────────────────────────────────
+# gh y docker-* vienen de sus repositorios (etc/yum.repos.d; los configura fedora-install.sh)
+ansible-core
+containerd.io
+docker-buildx-plugin
+docker-ce
+docker-ce-cli
+docker-compose-plugin
+doctl
+flatpak
+gh
+podman
+podman-compose
+
+# ── Virtualización ────────────────────────────────────────────────────────────
+# virt-manager en vez de gnome-boxes (fedora-install.sh lo desinstala)
+libvirt-daemon-kvm
+virt-manager
+
+# ── Servicios del sistema ─────────────────────────────────────────────────────
+# swaks envía correos de prueba por SMTP: comprueba la entrega local de Postfix.
+# caddy es el proxy inverso local con HTTPS de los servidores de desarrollo
+# (install-caddy.sh); mkcert firma sus certificados y nss-tools (certutil) hace
+# que Chrome confíe en ellos.
+caddy
+logrotate
+minidlna
+mkcert
+nss-tools
+postfix
+rsyslog
+swaks
+
+# ── Seguridad (revisar equipos propios) ───────────────────────────────────────
+# sqlmap (pipx) y nikto (upstream) no están en Fedora: los instala extras-install.sh.
+# Los módulos de Perl son los que necesita nikto. Con wireshark, fedora-install.sh
+# agrega el usuario al grupo wireshark (capturar sin root). clamav-freshclam
+# actualiza las firmas de ClamAV. trivy busca vulnerabilidades en dependencias e
+# imágenes de contenedores; hadolint revisa Dockerfiles.
+clamav
+clamav-freshclam
+hadolint
+lynis
+nmap
+perl-IO-Socket-SSL
+perl-JSON
+perl-Net-SSLeay
+perl-XML-LibXML
+perl-XML-Writer
+rkhunter
+trivy
+wireshark
+
+# ── Editores (repositorios en etc/yum.repos.d; los configura fedora-install.sh) ─
+codium
+cursor
+# pandoc: en Fedora el paquete se llama pandoc-cli (no existe «pandoc»)
+pandoc-cli
+
+# ── Escritorio GNOME ──────────────────────────────────────────────────────────
+# google-chrome-stable viene de su repositorio (etc/yum.repos.d; lo configura fedora-install.sh)
+google-chrome-stable
+nextcloud-client
+nextcloud-client-nautilus
+# KeePassXC: la app para abrir la base que genera zsh/scripts/bw2kp.py
+keepassxc
+ptyxis
+gnome-extensions-app
+gnome-shell-extension-appindicator
+gnome-shell-extension-dash-to-dock
+gnome-shell-extension-just-perfection
+gnome-tweaks
+ibm-plex-fonts-all
+libappindicator-gtk3
+libayatana-appindicator-gtk3
+
+# ── Multimedia ────────────────────────────────────────────────────────────────
+# decibels y showtime: los reproductores de Fedora, que abren los alias de sufijo
+# de zsh/zshaliases (escribir el nombre de un audio o un vídeo). mpv reproduce
+# audio y vídeo desde la terminal (también la voz del saludo matutino).
+decibels
+mpv
+picard
+rhythmbox
+rhythmbox-alternative-toolbar
+showtime
+vlc
+vlc-libs
+vlc-plugins-all
+
+# ── Gráficos ──────────────────────────────────────────────────────────────────
+# darktable revela fotos RAW; shotwell organiza y hace retoques rápidos
+# (recorte, enderezado, exposición, saturación y temperatura)
+darktable
+gimp
+ImageMagick
+inkscape
+shotwell
+
+# ── Emulación (NES, SNES, PlayStation y arcade) ──────────────────────────────
+# Los cores que retroarch recomienda (dependencias débiles) no se instalan:
+# fedora-install.sh usa exclude_from_weak='libretro-*'.
+evtest
+libretro-bsnes-mercury
+libretro-nestopia
+libretro-pcsx-rearmed
+mame
+retroarch
+retroarch-assets
+retroarch-database
+retroarch-filters
+
+# ── Diversión en la terminal ──────────────────────────────────────────────────
+asciiquarium
+bastet
+cbonsai
+cmatrix
+cowsay
+espeak-ng
+figlet
+fortune-mod
+lolcat
+mpg123
+sl
+telnet
+toilet
