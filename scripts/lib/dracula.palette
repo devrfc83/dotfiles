@@ -1,0 +1,27 @@
+# Paleta Dracula (https://draculatheme.com/contribute): los únicos colores que
+# pueden usar los archivos con colores propios de estos dotfiles (tmux, git, fzf,
+# dircolors, pgcli...). scripts/lint.sh lo revisa con scripts/lib/check-palette.py.
+# Una línea por color: el color, su nombre en Dracula y para qué se usa aquí.
+
+# Colores principales
+#282a36  Background    fondo; texto oscuro sobre fondos claros
+#44475a  Current Line  barras (tmux, pgcli), selección y fondos de resalte
+#f8f8f2  Foreground    texto
+#6272a4  Comment       texto secundario, separadores y bordes inactivos
+#8be9fd  Cyan          ramas remotas, enlaces, RAM
+#50fa7b  Green         agregado, correcto, CPU baja
+#ffb86c  Orange        modificado, avisos
+#ff79c6  Pink          sockets, conflictos, marcas
+#bd93f9  Purple        directorios, rama actual, elemento activo
+#ff5555  Red           borrado, errores, CPU alta
+#f1fa8c  Yellow        nombres de archivo en grep, mensajes, clima
+
+# Colores ANSI de la terminal (la paleta dracula de Ptyxis): el azul es morado
+#21222c  Black
+#ff6e6e  Bright Red
+#69ff94  Bright Green
+#ffffa5  Bright Yellow
+#d6acff  Bright Blue
+#ff92df  Bright Magenta
+#a4ffff  Bright Cyan
+#ffffff  Bright White

@@ -1,0 +1,25 @@
+# Opciones por defecto de ripgrep (rg). Se enlaza en ~/.config/ripgrep/ripgreprc
+# y lo activa RIPGREP_CONFIG_PATH (zsh/zshenv). Un argumento por línea; las
+# opciones de la línea de órdenes se suman a estas (--no-hidden, --case-sensitive
+# y -uu las anulan).
+
+# Distingue mayúsculas solo si el patrón tiene alguna
+--smart-case
+
+# Busca también en los archivos ocultos (.env, .github/...), pero no dentro de
+# .git; sigue respetando .gitignore
+--hidden
+--glob=!.git/
+
+# Las líneas muy largas (archivos minificados) se recortan en vez de llenar la
+# pantalla, con un adelanto del principio
+--max-columns=200
+--max-columns-preview
+
+# Colores Dracula (scripts/lib/dracula.palette), los mismos de git grep
+# (git/gitconfig): archivo amarillo, número de línea gris y coincidencia roja
+--colors=path:fg:0xf1,0xfa,0x8c
+--colors=line:fg:0x62,0x72,0xa4
+--colors=column:fg:0x62,0x72,0xa4
+--colors=match:fg:0xff,0x55,0x55
+--colors=match:style:bold

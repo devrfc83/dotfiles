@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Antes de cada commit: scripts/lint.sh (ShellCheck, shfmt, zsh, tmux, systemd,
+# gitconfig, JSON, paleta, Markdown, enlaces y secretos) y, solo si packages.txt
+# está en el stage, scripts/check-packages.sh (consulta los repositorios: un
+# paquete mal escrito haría fallar todo el dnf install).
+# Lo activa scripts/dotfiles-install.sh con core.hooksPath. Para saltarlo en un
+# commit puntual: git commit --no-verify.
+
+repo_root="$(git rev-parse --show-toplevel)"
+
+bash "${repo_root}/scripts/lint.sh"
+
+if ! git diff --cached --quiet -- packages.txt; then
+  bash "${repo_root}/scripts/check-packages.sh"
+fi

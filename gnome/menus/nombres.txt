@@ -1,0 +1,19 @@
+# Nombres propios de aplicaciones: <archivo .desktop>|<nombre>. dotfiles-install.sh
+# genera en ~/.local/share/applications/ una copia del .desktop del sistema con ese
+# nombre (en todos los idiomas); se vuelve a generar en cada ejecución (también
+# con --enlaces, desde dotfiles-update.sh), así que sigue los cambios del paquete.
+# El nombre cambia también en la cuadrícula de aplicaciones y en el dock. La copia
+# no lleva NotShowIn: así se muestra una aplicación que Fedora oculta en GNOME.
+# Mayúscula solo en la primera palabra («Reproductor de música»), salvo marcas.
+en-croissant.desktop|En Croissant
+gimp.desktop|GIMP
+dbeaver-ce.desktop|DBeaver
+virt-manager.desktop|Gestor de máquinas virtuales
+google-chrome.desktop|Navegador web
+org.wireshark.Wireshark.desktop|Escáner de tráfico
+org.gnome.SimpleScan.desktop|Escáner
+onlyoffice-desktopeditors.desktop|OnlyOffice
+org.musicbrainz.Picard.desktop|Picard
+org.gnome.Rhythmbox3.desktop|Rhythmbox
+vlc.desktop|VLC
+com.nextcloud.desktopclient.nextcloud.desktop|Nextcloud

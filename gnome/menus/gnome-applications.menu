@@ -1,0 +1,213 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN" "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+<!--
+  Menú de aplicaciones de GNOME (extensión apps-menu): se enlaza como
+  ~/.config/menus/gnome-applications.menu y reemplaza por completo al del sistema
+  (/etc/xdg/menus/gnome-applications.menu). Solo aparece lo que está aquí, en este
+  orden (Layout); una aplicación nueva no se agrega sola. Los nombres los cambia
+  dotfiles-install.sh con gnome/menus/nombres.txt.
+-->
+<Menu>
+    <Name>Applications</Name>
+    <Directory>X-GNOME-Menu-Applications.directory</Directory>
+    <DefaultAppDirs />
+    <DefaultDirectoryDirs />
+
+    <Menu>
+        <Name>Accesorios</Name>
+        <Directory>Utility.directory</Directory>
+        <Include>
+            <Filename>org.gnome.Nautilus.desktop</Filename>
+            <Filename>org.gnome.Characters.desktop</Filename>
+            <Filename>org.gnome.TextEditor.desktop</Filename>
+            <Filename>org.gnome.Maps.desktop</Filename>
+            <Filename>org.gnome.Weather.desktop</Filename>
+            <Filename>org.gnome.clocks.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>org.gnome.Nautilus.desktop</Filename>
+            <Filename>org.gnome.Characters.desktop</Filename>
+            <Filename>org.gnome.TextEditor.desktop</Filename>
+            <Filename>org.gnome.Maps.desktop</Filename>
+            <Filename>org.gnome.Weather.desktop</Filename>
+            <Filename>org.gnome.clocks.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Gráficos</Name>
+        <Directory>Graphics.directory</Directory>
+        <Include>
+            <Filename>org.gnome.Snapshot.desktop</Filename>
+            <Filename>org.darktable.darktable.desktop</Filename>
+            <Filename>gimp.desktop</Filename>
+            <Filename>org.inkscape.Inkscape.desktop</Filename>
+            <Filename>org.gnome.Shotwell.desktop</Filename>
+            <Filename>org.gnome.font-viewer.desktop</Filename>
+            <Filename>org.gnome.Loupe.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>org.gnome.Snapshot.desktop</Filename>
+            <Filename>org.darktable.darktable.desktop</Filename>
+            <Filename>gimp.desktop</Filename>
+            <Filename>org.inkscape.Inkscape.desktop</Filename>
+            <Filename>org.gnome.Shotwell.desktop</Filename>
+            <Filename>org.gnome.font-viewer.desktop</Filename>
+            <Filename>org.gnome.Loupe.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Internet</Name>
+        <Directory>Network.directory</Directory>
+        <Include>
+            <Filename>org.gnome.Connections.desktop</Filename>
+            <Filename>discord.desktop</Filename>
+            <Filename>org.gnome.Geary.desktop</Filename>
+            <Filename>google-chrome.desktop</Filename>
+            <Filename>org.wireshark.Wireshark.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>org.gnome.Connections.desktop</Filename>
+            <Filename>discord.desktop</Filename>
+            <Filename>org.gnome.Geary.desktop</Filename>
+            <Filename>google-chrome.desktop</Filename>
+            <Filename>org.wireshark.Wireshark.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Juegos</Name>
+        <Directory>Game.directory</Directory>
+        <Include>
+            <Filename>en-croissant.desktop</Filename>
+            <Filename>org.libretro.RetroArch.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>en-croissant.desktop</Filename>
+            <Filename>org.libretro.RetroArch.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Oficina</Name>
+        <Directory>Office.directory</Directory>
+        <Include>
+            <Filename>org.gnome.Calculator.desktop</Filename>
+            <Filename>org.gnome.Calendar.desktop</Filename>
+            <Filename>org.gnome.Contacts.desktop</Filename>
+            <Filename>org.gnome.SimpleScan.desktop</Filename>
+            <Filename>onlyoffice-desktopeditors.desktop</Filename>
+            <Filename>org.gnome.Papers.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>org.gnome.Calculator.desktop</Filename>
+            <Filename>org.gnome.Calendar.desktop</Filename>
+            <Filename>org.gnome.Contacts.desktop</Filename>
+            <Filename>org.gnome.SimpleScan.desktop</Filename>
+            <Filename>onlyoffice-desktopeditors.desktop</Filename>
+            <Filename>org.gnome.Papers.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Programación</Name>
+        <Directory>Development.directory</Directory>
+        <Include>
+            <Filename>android-studio.desktop</Filename>
+            <Filename>bruno.desktop</Filename>
+            <Filename>dbeaver-ce.desktop</Filename>
+            <Filename>org.gnome.Meld.desktop</Filename>
+            <Filename>com.visualstudio.CodeOSS.desktop</Filename>
+            <Filename>dev.zed.Zed.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>android-studio.desktop</Filename>
+            <Filename>bruno.desktop</Filename>
+            <Filename>dbeaver-ce.desktop</Filename>
+            <Filename>org.gnome.Meld.desktop</Filename>
+            <Filename>com.visualstudio.CodeOSS.desktop</Filename>
+            <Filename>dev.zed.Zed.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Sistema</Name>
+        <Directory>X-GNOME-Shell-System.directory</Directory>
+        <Include>
+            <Filename>org.gnome.baobab.desktop</Filename>
+            <Filename>org.gnome.Settings.desktop</Filename>
+            <Filename>org.gnome.DiskUtility.desktop</Filename>
+            <Filename>org.gnome.Extensions.desktop</Filename>
+            <Filename>org.gnome.SystemMonitor.desktop</Filename>
+            <Filename>org.gnome.Logs.desktop</Filename>
+            <Filename>org.gnome.tweaks.desktop</Filename>
+            <Filename>org.gnome.Software.desktop</Filename>
+            <Filename>org.gnome.Ptyxis.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>org.gnome.baobab.desktop</Filename>
+            <Filename>org.gnome.Settings.desktop</Filename>
+            <Filename>org.gnome.DiskUtility.desktop</Filename>
+            <Filename>org.gnome.Extensions.desktop</Filename>
+            <Filename>org.gnome.SystemMonitor.desktop</Filename>
+            <Filename>org.gnome.Logs.desktop</Filename>
+            <Filename>org.gnome.tweaks.desktop</Filename>
+            <Filename>org.gnome.Software.desktop</Filename>
+            <Filename>org.gnome.Ptyxis.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Sonido y vídeo</Name>
+        <Directory>AudioVideo.directory</Directory>
+        <Include>
+            <Filename>org.musicbrainz.Picard.desktop</Filename>
+            <Filename>org.gnome.Rhythmbox3.desktop</Filename>
+      <Filename>com.spotify.Client.desktop</Filename>
+            <Filename>org.gnome.Decibels.desktop</Filename>
+            <Filename>vlc.desktop</Filename>
+            <Filename>org.gnome.Showtime.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>org.musicbrainz.Picard.desktop</Filename>
+            <Filename>org.gnome.Rhythmbox3.desktop</Filename>
+      <Filename>com.spotify.Client.desktop</Filename>
+            <Filename>org.gnome.Decibels.desktop</Filename>
+            <Filename>vlc.desktop</Filename>
+            <Filename>org.gnome.Showtime.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Utilidades</Name>
+        <Directory>X-GNOME-Utilities.directory</Directory>
+        <Include>
+            <Filename>org.gnome.Yelp.desktop</Filename>
+            <Filename>bitwarden.desktop</Filename>
+            <Filename>org.fedoraproject.MediaWriter.desktop</Filename>
+            <Filename>virt-manager.desktop</Filename>
+            <Filename>org.keepassxc.KeePassXC.desktop</Filename>
+            <Filename>com.nextcloud.desktopclient.nextcloud.desktop</Filename>
+        </Include>
+        <Layout>
+            <Filename>org.gnome.Yelp.desktop</Filename>
+            <Filename>bitwarden.desktop</Filename>
+            <Filename>org.fedoraproject.MediaWriter.desktop</Filename>
+            <Filename>virt-manager.desktop</Filename>
+            <Filename>org.keepassxc.KeePassXC.desktop</Filename>
+            <Filename>com.nextcloud.desktopclient.nextcloud.desktop</Filename>
+        </Layout>
+    </Menu>
+
+    <Layout>
+        <Menuname>Accesorios</Menuname>
+        <Menuname>Gráficos</Menuname>
+        <Menuname>Internet</Menuname>
+        <Menuname>Juegos</Menuname>
+        <Menuname>Oficina</Menuname>
+        <Menuname>Programación</Menuname>
+        <Menuname>Sistema</Menuname>
+        <Menuname>Sonido y vídeo</Menuname>
+        <Menuname>Utilidades</Menuname>
+    </Layout>
+</Menu>

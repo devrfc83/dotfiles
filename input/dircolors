@@ -1,0 +1,258 @@
+# Configuración de dircolors, la utilidad que genera la variable LS_COLORS que
+# usa GNU ls con --color (y eza, fd, tree, el completado de zsh y readline).
+# Basada en la de GNU coreutils, con los colores cambiados a la paleta Dracula
+# (scripts/lib/dracula.palette).
+
+# Copyright (C) 1996-2025 Free Software Foundation, Inc.
+# Copying and distribution of this file, with or without modification,
+# are permitted provided the copyright notice and this notice are preserved.
+
+#
+# Las palabras clave COLOR, OPTIONS y EIGHTBIT (de la versión de dircolors de
+# Slackware) se reconocen pero se ignoran.
+
+# Las opciones globales pueden ir antes de las entradas TERM o COLORTERM
+
+# ===================================================================
+# Filtros de terminal
+# ===================================================================
+# Entradas TERM o COLORTERM (admiten patrones glob): lo que sigue se aplica solo
+# si esas variables de entorno coinciden.
+COLORTERM ?*
+TERM Eterm
+TERM ansi
+TERM *color*
+TERM con[0-9]*x[0-9]*
+TERM cons25
+TERM console
+TERM cygwin
+TERM *direct*
+TERM dtterm
+TERM gnome
+TERM hurd
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mlterm
+TERM putty
+TERM rxvt*
+TERM screen*
+TERM st
+TERM terminator
+TERM tmux*
+TERM vt100
+TERM vt220
+TERM xterm*
+
+# ===================================================================
+# Atributos de los tipos de archivo básicos
+# ===================================================================
+# Códigos de color de los tipos de archivo básicos. Admiten los códigos de 256
+# colores o de color verdadero de las terminales modernas; aquí se usan colores
+# de 24 bits de la paleta Dracula, con estos atributos:
+# Códigos de atributo:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Códigos de color de texto (paleta Dracula, 24 bits; el azul de Dracula es morado):
+# 38;2;40;42;54=black 38;2;255;85;85=red 38;2;80;250;123=green 38;2;241;250;140=yellow 38;2;189;147;249=blue 38;2;255;121;198=magenta 38;2;139;233;253=cyan 38;2;248;248;242=white
+# Códigos de color de fondo (el negro es Current Line, para distinguirlo del fondo):
+# 48;2;68;71;90=black 48;2;255;85;85=red 48;2;80;250;123=green 48;2;241;250;140=yellow 48;2;189;147;249=blue 48;2;255;121;198=magenta 48;2;139;233;253=cyan 48;2;248;248;242=white
+#NORMAL 00	# sin código de color
+#FILE 00	# archivo normal: sin color
+RESET 0		# vuelve al color «normal»
+DIR 01;38;2;189;147;249	# directorio
+LINK 01;38;2;139;233;253	# enlace simbólico (con 'target' en vez de un código,
+                # toma el color del archivo al que apunta)
+MULTIHARDLINK 00	# archivo normal con más de un enlace duro
+FIFO 48;2;68;71;90;38;2;241;250;140	# tubería con nombre (FIFO)
+SOCK 01;38;2;255;121;198	# socket
+DOOR 01;38;2;255;121;198	# door (Solaris)
+BLK 48;2;68;71;90;38;2;241;250;140;01	# dispositivo de bloques
+CHR 48;2;68;71;90;38;2;241;250;140;01	# dispositivo de caracteres
+ORPHAN 48;2;68;71;90;38;2;255;85;85;01 # enlace a un archivo inexistente o inaccesible...
+MISSING 00      # ...y los archivos a los que apuntan
+SETUID 38;2;248;248;242;48;2;255;85;85	# archivo con setuid (u+s)
+SETGID 38;2;40;42;54;48;2;241;250;140	# archivo con setgid (g+s)
+CAPABILITY 00	# archivo con capabilities (muy costoso de consultar)
+STICKY_OTHER_WRITABLE 38;2;40;42;54;48;2;80;250;123 # directorio con sticky bit y escribible por otros (+t,o+w)
+OTHER_WRITABLE 38;2;189;147;249;48;2;80;250;123 # directorio escribible por otros (o+w), sin sticky bit
+STICKY 38;2;248;248;242;48;2;189;147;249	# directorio con sticky bit (+t), no escribible por otros
+
+# Archivos con permiso de ejecución:
+EXEC 01;38;2;80;250;123
+
+# ===================================================================
+# Atributos por extensión de archivo
+# ===================================================================
+# Extensiones (como '.gz' o '.tar') que ls debe colorear: el sufijo, un espacio
+# y el código de color (y, si se quiere, un comentario tras '#'). Los sufijos no
+# distinguen mayúsculas, salvo que se definan códigos distintos para cada caso.
+#
+
+# Para sufijos al estilo DOS, pueden descomentarse estas líneas:
+#.cmd 01;38;2;80;250;123 # ejecutables (verde brillante)
+#.exe 01;38;2;80;250;123
+#.com 01;38;2;80;250;123
+#.btm 01;38;2;80;250;123
+#.bat 01;38;2;80;250;123
+# O, para colorear los scripts aunque no tengan el permiso de ejecución:
+#.sh  01;38;2;80;250;123
+#.csh 01;38;2;80;250;123
+
+# archivos comprimidos o empaquetados (rojo brillante)
+.7z  01;38;2;255;85;85
+.ace 01;38;2;255;85;85
+.alz 01;38;2;255;85;85
+.apk 01;38;2;255;85;85
+.arc 01;38;2;255;85;85
+.arj 01;38;2;255;85;85
+.bz  01;38;2;255;85;85
+.bz2 01;38;2;255;85;85
+.cab 01;38;2;255;85;85
+.cpio 01;38;2;255;85;85
+.crate 01;38;2;255;85;85
+.deb 01;38;2;255;85;85
+.drpm 01;38;2;255;85;85
+.dwm 01;38;2;255;85;85
+.dz  01;38;2;255;85;85
+.ear 01;38;2;255;85;85
+.egg 01;38;2;255;85;85
+.esd 01;38;2;255;85;85
+.gz  01;38;2;255;85;85
+.jar 01;38;2;255;85;85
+.lha 01;38;2;255;85;85
+.lrz 01;38;2;255;85;85
+.lz  01;38;2;255;85;85
+.lz4 01;38;2;255;85;85
+.lzh 01;38;2;255;85;85
+.lzma 01;38;2;255;85;85
+.lzo 01;38;2;255;85;85
+.pyz 01;38;2;255;85;85
+.rar 01;38;2;255;85;85
+.rpm 01;38;2;255;85;85
+.rz  01;38;2;255;85;85
+.sar 01;38;2;255;85;85
+.swm 01;38;2;255;85;85
+.t7z 01;38;2;255;85;85
+.tar 01;38;2;255;85;85
+.taz 01;38;2;255;85;85
+.tbz 01;38;2;255;85;85
+.tbz2 01;38;2;255;85;85
+.tgz 01;38;2;255;85;85
+.tlz 01;38;2;255;85;85
+.txz 01;38;2;255;85;85
+.tz  01;38;2;255;85;85
+.tzo 01;38;2;255;85;85
+.tzst 01;38;2;255;85;85
+.udeb 01;38;2;255;85;85
+.war 01;38;2;255;85;85
+.whl 01;38;2;255;85;85
+.wim 01;38;2;255;85;85
+.xz  01;38;2;255;85;85
+.z   01;38;2;255;85;85
+.zip 01;38;2;255;85;85
+.zoo 01;38;2;255;85;85
+.zst 01;38;2;255;85;85
+
+# formatos de imagen
+.avif 01;38;2;255;121;198
+.jpg 01;38;2;255;121;198
+.jpeg 01;38;2;255;121;198
+.jxl 01;38;2;255;121;198
+.mjpg 01;38;2;255;121;198
+.mjpeg 01;38;2;255;121;198
+.gif 01;38;2;255;121;198
+.bmp 01;38;2;255;121;198
+.pbm 01;38;2;255;121;198
+.pgm 01;38;2;255;121;198
+.ppm 01;38;2;255;121;198
+.tga 01;38;2;255;121;198
+.xbm 01;38;2;255;121;198
+.xpm 01;38;2;255;121;198
+.tif 01;38;2;255;121;198
+.tiff 01;38;2;255;121;198
+.png 01;38;2;255;121;198
+.svg 01;38;2;255;121;198
+.svgz 01;38;2;255;121;198
+.mng 01;38;2;255;121;198
+.pcx 01;38;2;255;121;198
+.mov 01;38;2;255;121;198
+.mpg 01;38;2;255;121;198
+.mpeg 01;38;2;255;121;198
+.m2v 01;38;2;255;121;198
+.mkv 01;38;2;255;121;198
+.webm 01;38;2;255;121;198
+.webp 01;38;2;255;121;198
+.ogm 01;38;2;255;121;198
+.mp4 01;38;2;255;121;198
+.m4v 01;38;2;255;121;198
+.mp4v 01;38;2;255;121;198
+.vob 01;38;2;255;121;198
+.qt  01;38;2;255;121;198
+.nuv 01;38;2;255;121;198
+.wmv 01;38;2;255;121;198
+.asf 01;38;2;255;121;198
+.rm  01;38;2;255;121;198
+.rmvb 01;38;2;255;121;198
+.flc 01;38;2;255;121;198
+.avi 01;38;2;255;121;198
+.fli 01;38;2;255;121;198
+.flv 01;38;2;255;121;198
+.gl 01;38;2;255;121;198
+.dl 01;38;2;255;121;198
+.xcf 01;38;2;255;121;198
+.xwd 01;38;2;255;121;198
+.yuv 01;38;2;255;121;198
+.cgm 01;38;2;255;121;198
+.emf 01;38;2;255;121;198
+
+# https://wiki.xiph.org/MIME_Types_and_File_Extensions
+.ogv 01;38;2;255;121;198
+.ogx 01;38;2;255;121;198
+
+# formatos de audio
+.aac 00;38;2;139;233;253
+.au 00;38;2;139;233;253
+.flac 00;38;2;139;233;253
+.m4a 00;38;2;139;233;253
+.mid 00;38;2;139;233;253
+.midi 00;38;2;139;233;253
+.mka 00;38;2;139;233;253
+.mp3 00;38;2;139;233;253
+.mpc 00;38;2;139;233;253
+.ogg 00;38;2;139;233;253
+.ra 00;38;2;139;233;253
+.wav 00;38;2;139;233;253
+
+# https://wiki.xiph.org/MIME_Types_and_File_Extensions
+.oga 00;38;2;139;233;253
+.opus 00;38;2;139;233;253
+.spx 00;38;2;139;233;253
+.xspf 00;38;2;139;233;253
+
+# respaldos y temporales
+*~ 00;38;2;98;114;164
+*# 00;38;2;98;114;164
+.bak 00;38;2;98;114;164
+.crdownload 00;38;2;98;114;164
+.dpkg-dist 00;38;2;98;114;164
+.dpkg-new 00;38;2;98;114;164
+.dpkg-old 00;38;2;98;114;164
+.dpkg-tmp 00;38;2;98;114;164
+.old 00;38;2;98;114;164
+.orig 00;38;2;98;114;164
+.part 00;38;2;98;114;164
+.rej 00;38;2;98;114;164
+.rpmnew 00;38;2;98;114;164
+.rpmorig 00;38;2;98;114;164
+.rpmsave 00;38;2;98;114;164
+.swp 00;38;2;98;114;164
+.tmp 00;38;2;98;114;164
+.ucf-dist 00;38;2;98;114;164
+.ucf-new 00;38;2;98;114;164
+.ucf-old 00;38;2;98;114;164
+
+#
+# Entradas TERM o COLORTERM posteriores pueden agregar o reemplazar ajustes
+# para las terminales que coincidan con esas variables de entorno.

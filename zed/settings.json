@@ -1,0 +1,87 @@
+// Configuración de Zed (~/.config/zed/settings.json, enlace a este archivo). Los
+// cambios hechos desde la interfaz se escriben aquí.
+{
+  // Tema Dracula (extensión oficial dracula/zed), como la terminal
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Warm Charmed Icons",
+    "dark": "Warm Charmed Icons",
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "base_keymap": "VSCode",
+  "minimap": {
+    "show": "always",
+  },
+  "buffer_font_fallbacks": ["FiraCode Nerd Font Mono"],
+  "wrap_guides": [132],
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "Dracula Flat",
+    "dark": "Dracula Flat",
+  },
+  "theme_overrides": {
+    "Dracula Flat": {
+      "border.variant": "#282a36",
+      "border": "#282a36",
+      "title_bar.background": "#282a36",
+      "panel.background": "#282a36",
+      "pane.focused_border": "#353747",
+      "syntax": {
+        "comment": {
+          "font_style": "italic",
+        },
+        "comment.doc": {
+          "font_style": "italic",
+        },
+      },
+    },
+  },
+
+  // Extensiones que Zed instala solo al abrirse. Rust, Python, TypeScript y Go
+  // vienen con Zed.
+  "auto_install_extensions": {
+    "dracula": true,
+    "dockerfile": true,
+    "php": true,
+    "sql": true,
+    "vala": true,
+    "xml": true,
+  },
+
+  // ── Fuentes ──────────────────────────────────────────────────────────────────
+  // Editor: FiraCode con ligaduras (=> != >= ->). Terminal integrada: variante
+  // Mono, porque trabaja en una cuadrícula de celdas, como Ptyxis.
+  "buffer_font_family": "FiraCode Nerd Font",
+  "terminal": {
+    "font_family": "FiraCode Nerd Font Mono",
+  },
+
+  // ── Longitud de línea (la de editorconfig: 132; Markdown: 80) ────────────────
+  // Regla y ajuste de línea visual en la misma columna.
+  "preferred_line_length": 132,
+  "soft_wrap": "prefer_line",
+  "languages": {
+    "Markdown": {
+      "format_on_save": "on",
+      "wrap_guides": [132],
+      "soft_wrap": "prefer_line",
+      "preferred_line_length": 132,
+    },
+  },
+
+  // ── Formato al guardar ───────────────────────────────────────────────────────
+  "format_on_save": "on",
+
+  // ── Telemetría ───────────────────────────────────────────────────────────────
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+}

@@ -1,0 +1,16 @@
+# PHP 8.6 de Remi (lo instala scripts/fedora-install.sh): Fedora 45 trae PHP 8.5 y
+# no cambia de versión menor hasta la siguiente versión de Fedora. Solo el
+# repositorio php86, sin módulos (dnf 5 no los usa) ni el resto de Remi:
+# includepkgs deja tomar solo PHP y sus extensiones (Composer sigue viniendo de
+# Fedora). priority=10 hace que dnf prefiera estos paquetes aunque Fedora tenga
+# una versión con número mayor (como php-pecl-pcov), que estaría compilada para
+# PHP 8.5. Para volver al PHP de Fedora: se borra este archivo (aquí y en
+# /etc/yum.repos.d/) y se ejecuta sudo dnf distro-sync 'php*'.
+[remi-php86]
+name=Remi - PHP 8.6 - Fedora $releasever - $basearch
+baseurl=https://rpms.remirepo.net/fedora/$releasever/php86/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=https://rpms.remirepo.net/RPM-GPG-KEY-remi2026
+priority=10
+includepkgs=php*

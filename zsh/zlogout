@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# Limpia la pantalla al salir. Fedora no trae clear_console (es de Debian) y su
+# ~/.bash_logout está vacío: clear (ncurses) ya borra también el historial de
+# desplazamiento de la terminal.
+clear

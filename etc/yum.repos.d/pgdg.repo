@@ -1,0 +1,29 @@
+# PostgreSQL 19, PostGIS y pgRouting del repositorio oficial de PostgreSQL (PGDG;
+# lo instala scripts/fedora-install.sh). En Fedora 45, postgresql19 se quedó en una
+# beta y no hay PostGIS ni pgRouting para 19. includepkgs deja tomar solo esos
+# paquetes: el repositorio común publica también sus versiones de pgcli, pspg,
+# pg_activity, psycopg y otros que vienen de Fedora. De él solo salen las
+# bibliotecas de PostGIS (GDAL, GEOS, PROJ, libgeotiff y libspatialite, con nombres
+# versionados que no chocan con los de Fedora), librttopo, que libspatialite50
+# necesita en una versión más nueva que la de Fedora, y SFCGAL, que postgis_sfcgal
+# necesita más nueva que la de Fedora (con la de Fedora no carga: falta un símbolo,
+# aunque el soname coincide). priority=10 hace que dnf
+# prefiera PGDG aunque Fedora tenga un paquete con el mismo nombre (postgresql19).
+# Para pasar a otra versión mayor: docs/postgresql.md.
+[pgdg19]
+name=PostgreSQL 19 - Fedora $releasever - $basearch
+baseurl=https://download.postgresql.org/pub/repos/yum/19/fedora/fedora-$releasever-$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-Fedora
+priority=10
+includepkgs=postgresql19* postgis*_19* pgrouting_19*
+
+[pgdg-common]
+name=PostgreSQL común - Fedora $releasever - $basearch
+baseurl=https://download.postgresql.org/pub/repos/yum/common/fedora/fedora-$releasever-$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-Fedora
+priority=10
+includepkgs=gdal*-libs geos3* libgeotiff1* libspatialite5* proj9* librttopo SFCGAL*

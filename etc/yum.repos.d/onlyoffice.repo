@@ -1,0 +1,10 @@
+# OnlyOffice Desktop Editors (lo instala scripts/fedora-install.sh). El repositorio
+# también publica paquetes del sistema (xorg-x11-server-Xvfb, xorg-x11-font-utils...)
+# que reemplazarían a los de Fedora: includepkgs deja tomar solo el editor.
+[onlyoffice]
+name=ONLYOFFICE
+baseurl=https://download.onlyoffice.com/repo/centos/main/noarch/
+enabled=1
+gpgcheck=1
+gpgkey=https://download.onlyoffice.com/GPG-KEY-ONLYOFFICE
+includepkgs=onlyoffice-desktopeditors

@@ -1,0 +1,4 @@
+# Alias de gh (GitHub CLI). dotfiles-install.sh los importa con
+# «gh alias import --clobber» en ~/.config/gh/config.yml, que no se enlaza: gh lo
+# reescribe y hosts.yml, a su lado, guarda el token. Un alias por línea.
+co: pr checkout

@@ -1,0 +1,10 @@
+# Oculta GVim del menú de aplicaciones de GNOME. vim-X11 se instala por vimx (Vim
+# con portapapeles) y trae además gvim con su entrada en
+# /usr/share/applications/gvim.desktop. Esta copia (enlace en
+# ~/.local/share/applications/, que tiene prioridad) la reemplaza: NoDisplay la
+# saca del menú y, sin MimeType, gvim tampoco se ofrece para abrir archivos.
+[Desktop Entry]
+Type=Application
+Name=GVim
+Exec=gvim -f %F
+NoDisplay=true

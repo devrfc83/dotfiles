@@ -1,0 +1,17 @@
+{
+  "__ph_opt_in_out_phc_kgEBtifs0EgWlrl4ROYEbnsQ1b7BS2W5BKLNyXe7f8z": 0,
+  "auto-promote": false,
+  "board-image": "blue.png",
+  "document-dir": "~/Documentos/En Croissant",
+  "i18nextLng": "es-ES",
+  "letters": "letters",
+  "material-display": "all",
+  "native-bar": false,
+  "piece-set": "maestro",
+  "puzzle-db": null,
+  "show-consecutive-arrows": true,
+  "show-coordinates-v2": "edge",
+  "sound-collection": "standard",
+  "sound-volume": 0.5,
+  "telemetry-enabled": false
+}
