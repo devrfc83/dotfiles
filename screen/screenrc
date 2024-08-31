@@ -1,0 +1,17 @@
+# General settings
+vbell on
+vbell_msg '!Bell!'
+
+autodetach on
+startup_message off
+defscrollback 10000
+
+bind x
+bind ^x
+bind h
+bind ^h
+bind ^
+bind .
+
+bind } history
+bind k kill
